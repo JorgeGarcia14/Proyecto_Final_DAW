@@ -4,7 +4,7 @@ import axios from 'axios';
 const Menu = ({ visible, toggleVisibility }) => {
 
   return (
-    <div className="caja-principal fixed left-0 top-0 w-64 h-screen bg-cyan-950 flex flex-col justify-between p-4 z-10">
+    <div className="caja-principal fixed left-0 top-0 w-64 h-screen bg-cyan-950 flex flex-col justify-between p-4 z-10 shadow-md">
       <div className="caja-menu flex flex-col space-y-4">
         <button className="boton-menu btn btn-dark text-left" onClick={() => toggleVisibility('perfil')}>Perfil</button>
         <button className="boton-menu btn btn-dark text-left" onClick={() => toggleVisibility('contactos')}>Contactos</button>

@@ -24,19 +24,22 @@ function Perfil() {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center h-full">
-      <div className="flex items-center justify-between w-1/3 mb-16">
-        <h2 className="titulo-textos text-xl font-semibold ">
-          Perfil de Empleado
-        </h2>
-        <img
-          src="./images/foto.jpg"
-          alt="Foto de perfil"
-          className="w-24 h-24 rounded-full object-cover border-4 border-gray-200"
-        />
+    <div className="flex flex-col justify-center items-center h-full mt-8">
+      <div className="flex items-center justify-between w-2/3 mb-16 bg-gray-300 rounded-full bg-opacity-25 hover:bg-opacity-100 transition-colors duration-500 shadow-md">
+        <div className="  w-full p-4">
+          <h2 className="titulo-textos text-center text-xl font-semibold">
+            Perfil de Empleado
+          </h2>
+        </div>
+          <img
+            src="./images/foto.jpg"
+            alt="Foto de perfil"
+            className="w-32 h-28 object-cover"
+          />
       </div>
-      <div className="flex justify-center">
-        <table className="w-2/3">
+
+      <div className="flex justify-center mb-20 w-auto text-center hover:bg-gray-100 hover:bg-opacity-40 rounded-3xl transition-colors duration-500 shadow-md">
+        <table className="m-8">
           <tbody>
             <tr>
               <td className="textos-importantes font-semibold p-2">Nombre:</td>
@@ -64,11 +67,6 @@ function Perfil() {
             </tr>
           </tbody>
         </table>
-      </div>
-      <div className="flex justify-center w-full mt-4">
-        <button className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded mt-14">
-          Editar Perfil
-        </button>
       </div>
     </div>
   );

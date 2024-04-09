@@ -8,9 +8,10 @@
   box-sizing: border-box;
 }
 
-html, body {
+body {
   height: 100%;
   margin: 0;
+  background-color: #e5e6e7;
 }
 /*LOGO*/
 .titulo{
@@ -52,9 +53,9 @@ html, body {
   color: white;
 }
 
+/*MENU*/
 .caja-principal{
-  opacity: 0.5;
-  background-color: linear-gradient(to bottom, #ffffff, #000000);
+  background-color: #8399A1;
 }
 
 .caja-menu {
