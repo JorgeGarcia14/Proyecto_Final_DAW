@@ -57,6 +57,9 @@ function Login({ onLogin }) {
           <button type="submit" className="p-2 bg-blue-500 text-white rounded">
             Iniciar Sesión
           </button>
+          <div>
+            <p id="mensajes-error-login" className="text-red-500 text-center mt-6 font-bold"></p>
+          </div>
         </form>
       </div>
     </div>
