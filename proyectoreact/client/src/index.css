@@ -1,9 +1,42 @@
 /* global.css */
-
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Mochiy+Pop+P+One&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+/*LOGO*/
+.titulo{
+  font-size: 2em;
+  color:rgb(61, 88, 139);
+  font-family: "Mochiy Pop P One", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: bolder;
+}
+
+/*INICIO DE SESION*/
+
+.caja-login {
+  height: calc(100vh - 60px - 36px); /*Evitando el scroll en la pagina*/
+  background-color: #8399A1;
+}
+
+.titulo-login{
+  font-size: 2em;
+  color:rgb(61, 88, 139);
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-optical-sizing: auto;
+}
+
+
+/*BOTONES*/
 .boton-inicio {
   color: white;
 }
