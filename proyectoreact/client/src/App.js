@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import Header from './components/header';
-import Menu from './components/menu';
-import Perfil from './components/perfil';
-import Contactos from './components/contactos';
-import Login from './components/login';
-import Caja from './components/caja';
+import React, { useState } from "react";
+import Header from "./components/header";
+import Menu from "./components/menu";
+import Perfil from "./components/perfil";
+import Contactos from "./components/contactos";
+import Login from "./components/login";
+import Caja from "./components/caja";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Maneja el inicio de sesion
@@ -25,17 +25,18 @@ function App() {
       {isLoggedIn && (
         <Menu visible={visible} toggleVisibility={toggleVisibility} />
       )}
-      <Caja className="flex-grow">
-        {isLoggedIn ? (
-          <>
-            {visible === 'perfil' && <Perfil />}
-            {visible === 'contactos' && <Contactos />}
+
+      {isLoggedIn ? (
+        <>
+          <Caja className="flex-grow">
+            {visible === "perfil" && <Perfil />}
+            {visible === "contactos" && <Contactos />}
             {/* Agrega aquí los demás componentes */}
-          </>
-        ) : (
-          <Login onLogin={handleLogin} />
-        )}
-      </Caja>
+          </Caja>
+        </>
+      ) : (
+        <Login onLogin={handleLogin} />
+      )}
     </div>
   );
 }
