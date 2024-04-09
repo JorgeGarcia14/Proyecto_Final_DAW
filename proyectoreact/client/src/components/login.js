@@ -8,16 +8,16 @@ function Login({ onLogin }) {
     event.preventDefault();
 
     try {
-      const response = await fetch(
+      const response = await fetch( //Logica para manejar el incio de sesion
         `http://localhost:5000/api/usuario/${correo}`
       );
 
-      if (response.ok) {
+      if (response.ok) { //Si el usuario existe
         const data = await response.json();
         console.log(data);
 
-        if (data[0].Contraseña === contraseña) {
-          onLogin();
+        if (data[0].Contraseña === contraseña) {//Si la contraseña es correcta
+          onLogin();//Se inicia sesion
         } else {
           document.getElementById("mensajes-error-login").innerHTML =
             "Contraseña incorrecta";
@@ -34,9 +34,9 @@ function Login({ onLogin }) {
   };
 
   return (
-    <div className="caja-login flex items-center justify-center h-screen bg-blue-200">
+    <div className="caja-login flex items-center justify-center min-h-screen bg-blue-200 pt-30">
       <div className="class form-login p-6 m-4 w-1/3 h-auto bg-white shadow-lg rounded-lg overflow-auto">
-        <h2 className="titulo-login text-center mb-4 font-serif font-bold">
+        <h2 className="titulo-textos text-center mb-4 font-serif font-bold">
           Iniciar Sesión
         </h2>
         <form onSubmit={handleSubmit} className="flex flex-col">
@@ -55,11 +55,8 @@ function Login({ onLogin }) {
             className="p-2 mb-4 border rounded"
           />
           <button type="submit" className="p-2 bg-blue-500 text-white rounded">
-            Iniciar sesión
+            Iniciar Sesión
           </button>
-          <div>
-            <p id ="mensajes-error-login" className=" text-center mt-3 text-red-700 font-bold"></p>
-          </div>
         </form>
       </div>
     </div>

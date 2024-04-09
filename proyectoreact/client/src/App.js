@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import './index.css'
-import Header from "./components/header";
-import Menu from "./components/menu";
-import Perfil from "./components/perfil";
-import Login from "./components/login"; // Asegúrate de importar el componente Login
+import React, { useState } from 'react';
+import Header from './components/header';
+import Menu from './components/menu';
+import Perfil from './components/perfil';
+import Contactos from './components/contactos';
+import Login from './components/login';
+import Caja from './components/caja';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Maneja el inicio de sesion
@@ -12,39 +13,30 @@ function App() {
     setIsLoggedIn(true);
   };
 
-  const [visible, setVisible] = useState({
-    //Manejo de estado de los diferentes componentes que aparecen al pulsar los botones del menú
-    perfil: false,
-    contactos: false,
-    horarios: false,
-    nominas: false,
-    sugerencias: false,
-    vacantes: false,
-    noticias: false,
-  });
+  const [visible, setVisible] = useState("");
 
   const toggleVisibility = (componente) => {
-    setVisible((prevState) => ({
-      ...prevState,
-      [componente]: !prevState[componente],
-    }));
+    setVisible(componente);
   };
 
   return (
-    <>
+    <div className="flex flex-col h-screen">
       <Header />
-      {isLoggedIn ? (
-        <>
-          <Menu 
-            visible={visible} 
-            toggleVisibility={toggleVisibility}
-          />
-          {visible.perfil && <Perfil />}
-        </>
-      ) : (
-        <Login onLogin={handleLogin} />
+      {isLoggedIn && (
+        <Menu visible={visible} toggleVisibility={toggleVisibility} />
       )}
-    </>
+      <Caja className="flex-grow">
+        {isLoggedIn ? (
+          <>
+            {visible === 'perfil' && <Perfil />}
+            {visible === 'contactos' && <Contactos />}
+            {/* Agrega aquí los demás componentes */}
+          </>
+        ) : (
+          <Login onLogin={handleLogin} />
+        )}
+      </Caja>
+    </div>
   );
 }
 

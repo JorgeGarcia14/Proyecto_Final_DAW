@@ -28,13 +28,24 @@ html, body {
   background-color: #8399A1;
 }
 
-.titulo-login{
+.titulo-textos{
   font-size: 2em;
   color:rgb(61, 88, 139);
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-optical-sizing: auto;
 }
 
+/*TEXTOS*/
+.textos-importantes{
+  font-size: 1em;
+  color:rgb(61, 88, 139);
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-optical-sizing: auto;
+}
+
+.fuente{
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 
 /*BOTONES*/
 .boton-inicio {
