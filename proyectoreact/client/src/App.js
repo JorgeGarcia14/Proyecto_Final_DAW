@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Header from "./components/header";
-import Menu from "./components/menu";
-import Perfil from "./components/perfil";
-import Contactos from "./components/contactos";
-import Login from "./components/login";
-import Caja from "./components/caja";
+import Header from "./components/utils/header";
+import Menu from "./components/utils/menu";
+import Perfil from "./components/funcionalidades/perfil";
+import Contactos from "./components/funcionalidades/contactos";
+import Login from "./components/utils/login";
+import Caja from "./components/utils/caja";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Maneja el inicio de sesion
