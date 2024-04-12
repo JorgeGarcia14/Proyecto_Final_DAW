@@ -26,16 +26,18 @@ function Perfil() {
   return (
     <div className="flex flex-col justify-center items-center h-full mt-8">
       <div className="flex items-center justify-between w-2/3 mb-16 bg-gray-300 rounded-full bg-opacity-25 hover:bg-opacity-100 transition-colors duration-500 shadow-md">
-        <div className="  w-full p-4">
+        <div className="w-full p-4">
           <h2 className="titulo-textos text-center text-xl font-semibold">
             Perfil de Empleado
           </h2>
         </div>
+        <div className="transform hover:scale-110 hover:-translate-x-2 transition-transform duration-500">
           <img
             src="./images/foto.jpg"
             alt="Foto de perfil"
-            className="w-32 h-28 object-cover"
+            className="w-32 h-28 object-cover rounded-full"
           />
+        </div>
       </div>
 
       <div className="flex justify-center mb-20 w-auto text-center hover:bg-gray-100 hover:bg-opacity-40 rounded-3xl transition-colors duration-500 shadow-md">
