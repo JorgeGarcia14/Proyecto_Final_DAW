@@ -29,7 +29,7 @@ function App() {
       {isLoggedIn ? (
         <>
           <Caja className="flex-grow">
-            {visible === "perfil" && <Perfil />}
+            {visible === "perfil"&& <Perfil />}
             {visible === "contactos" && <Contactos />}
             {/* Agrega aquí los demás componentes */}
           </Caja>
