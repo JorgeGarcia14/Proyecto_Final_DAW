@@ -1,0 +1,103 @@
+/* global.css */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Mochiy+Pop+P+One&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  background-color: #e5e6e7;
+}
+/*LOGO*/
+.titulo{
+  font-size: 2em;
+  color:rgb(61, 88, 139);
+  font-family: "Mochiy Pop P One", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: bolder;
+}
+
+/*INICIO DE SESION*/
+
+.caja-login {
+  height: calc(100vh - 60px - 36px); /*Evitando el scroll en la pagina*/
+  background-color: #8399A1;
+}
+
+.titulo-textos{
+  font-size: 2em;
+  color:rgb(61, 88, 139);
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-optical-sizing: auto;
+}
+
+/*TEXTOS*/
+.textos-importantes{
+  font-size: 1em;
+  color:rgb(61, 88, 139);
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-optical-sizing: auto;
+}
+
+.fuente{
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/*BOTONES*/
+.boton-inicio {
+  color: white;
+}
+
+/*MENU*/
+.caja-principal{
+  background-color: #8399A1;
+}
+
+.caja-menu {
+  color: white;
+  margin-top: 150px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 30%;
+  height: 100%;
+  z-index: 10;
+}
+
+.boton-header{
+  background-color: #768D97;
+}
+
+.boton-header:hover{
+  background-color: #607077;
+}
+
+.boton-menu {
+  /* Estilos base del botón */
+  width: 240px;
+  font-size: medium; /* Tamaño base del texto */
+  padding: 8px 16px; /* Relleno del botón */
+  border: none; /* Quitamos el borde */
+  margin-left: 5px;
+  transition: box-shadow 0.3s; /* Transición para el cambio en la sombra */
+}
+
+.boton-menu:hover { 
+  box-shadow: 0 0 0 2px white;
+}
+
+
+header {
+  position: relative;
+  z-index: 20; /* Asegura que el Header esté por encima del menú */
+}
+
+.caja-perfil{
+  margin-right: 100px;
+  width: 70em
+}
