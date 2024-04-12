@@ -1,16 +1,61 @@
 /* global.css */
-
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Mochiy+Pop+P+One&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100%;
+  margin: 0;
+  background-color: #e5e6e7;
+}
+/*LOGO*/
+.titulo{
+  font-size: 2em;
+  color:rgb(61, 88, 139);
+  font-family: "Mochiy Pop P One", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: bolder;
+}
+
+/*INICIO DE SESION*/
+
+.caja-login {
+  height: calc(100vh - 60px - 36px); /*Evitando el scroll en la pagina*/
+  background-color: #8399A1;
+}
+
+.titulo-textos{
+  font-size: 2em;
+  color:rgb(61, 88, 139);
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-optical-sizing: auto;
+}
+
+/*TEXTOS*/
+.textos-importantes{
+  font-size: 1em;
+  color:rgb(61, 88, 139);
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-optical-sizing: auto;
+}
+
+.fuente{
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/*BOTONES*/
 .boton-inicio {
   color: white;
 }
 
+/*MENU*/
 .caja-principal{
-  opacity: 0.5;
-  background-color: linear-gradient(to bottom, #ffffff, #000000);
+  background-color: #8399A1;
 }
 
 .caja-menu {

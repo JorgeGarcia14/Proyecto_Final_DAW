@@ -2,10 +2,11 @@ import React from "react";
 
 export default function Header() {
   return (
-    <header className="relative bg-white h-30">
-      <div className="container-xl flex justify-between items-center px-4 py-2 mx-auto relative z-10">
+    <header className="fixed top-0 w-full z-50 bg-white h-30">
+      <div className="container-xl flex justify-between items-center px-4 py-2 mx-auto relative z-10 shadow-md p-40">
         <div className="flex items-center">
           <img src="./images/logo.png" alt="Logo" className="h-20 w-auto mr-4" /> 
+          <h3 className="titulo">WorkZen</h3>
         </div>
         <div className="flex">
 
