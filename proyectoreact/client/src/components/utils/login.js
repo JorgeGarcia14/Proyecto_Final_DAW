@@ -17,6 +17,8 @@ function Login({ onLogin }) {
         console.log(data);
 
         if (data[0].Contraseña === contraseña) {//Si la contraseña es correcta
+          const empleadoId = data[0].EmpleadoID; //Almacenando en localStorage el id del empleado
+          localStorage.setItem("empleadoId", empleadoId);
           onLogin();//Se inicia sesion
         } else {
           document.getElementById("mensajes-error-login").innerHTML =

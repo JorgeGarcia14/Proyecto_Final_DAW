@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./components/utils/header";
 import Menu from "./components/utils/menu";
 import Perfil from "./components/funcionalidades/perfil";
@@ -19,6 +19,16 @@ function App() {
   const toggleVisibility = (componente) => {
     setVisible(componente);
   };
+
+  useEffect(() => {
+    // Verificar si hay un ID de usuario en el localStorage al cargar la aplicación
+    const empleadoId = localStorage.getItem("empleadoId");
+    if (empleadoId) {
+      setIsLoggedIn(true);
+    }
+  }, []); // Este efecto se ejecuta solo una vez al cargar la aplicación
+
+  
 
   return (
     <div className="flex flex-col h-screen">
