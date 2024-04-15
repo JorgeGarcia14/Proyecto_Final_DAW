@@ -1,28 +1,8 @@
-// db.js
+import { Sequelize } from "sequelize";
+import dotenv from "dotenv";
+dotenv.config();
 
-const mysql = require("mysql");
+const db = new Sequelize(process.env.DB_URL); //?ssl=true , fuerza la conexion
 
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "PortalEmpleado",
-});
+export default db;
 
-db.connect((err) => {
-  if (err) {
-    throw err;
-  }
-  console.log("Conectado a la base de datos");
-});
-
-// Realizar una consulta simple para comprobar la conexión
-db.query("SHOW TABLES", (err, results) => {
-  if (err) {
-    console.log("Error al realizar la consulta", err);
-  } else {
-    console.log("Tablas en la base de datos:", results);
-  }
-});
-
-module.exports = db;

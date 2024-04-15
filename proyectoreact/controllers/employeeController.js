@@ -1,24 +1,22 @@
-// controllers/employeeController.js
+import { getEmployee as getEmployeeModel, getEmployees as getEmployeesModel } from '../models/employee.js';
 
-const Employee = require('../models/employee');
-
-exports.getEmployees = (req, res) => {
-  Employee.getemployees((err, employees) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.json(employees);
-    }
-  });
-};
-
-exports.getEmployee = (req, res) => {
+export const getEmployee = (req, res) => {
   const id = req.params.id;
-  Employee.getEmployee(id, (err, employee) => {
+  getEmployeeModel(id, (err, employee) => {
     if (err) {
       res.status(500).send(err);
     } else {
       res.json(employee);
+    }
+  });
+};
+
+export const getEmployees = (req, res) => {
+  getEmployeesModel((err, employees) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.json(employees);
     }
   });
 };

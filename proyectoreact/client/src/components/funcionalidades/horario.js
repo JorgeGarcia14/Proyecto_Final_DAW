@@ -7,7 +7,7 @@ function Horario() {
   const [horario, setHorario] = useState(null);
 
   useEffect(() => {
-    const id = localStorage.getItem('empleadoId');
+    const id = localStorage.getItem('usuarioId');
     axios
       .get(`http://localhost:5000/api/horario/${id}`)
       .then((response) => {

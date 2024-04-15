@@ -1,13 +1,16 @@
-// models/employee.js
+import db from '../db.js';
 
-const db = require('../db');
-
-exports.getemployees = (callback) => { //Ruta que devuelve a todos los empleados
+export const getEmployees = (callback) => { //Ruta que devuelve a todos los empleados
   const sql = 'SELECT * FROM empleados';
   db.query(sql, callback);
 };
 
-exports.getEmployee = (id, callback) => { //Ruta que devuelve a un empleado por id
-  const sql = 'SELECT * FROM empleados WHERE id = ?';
-  db.query(sql, [id], callback);
+export const getEmployee = (id, callback) => { //Ruta que devuelve a un empleado por id
+  const sql = 'SELECT * FROM empleados WHERE id = :id';
+  db.query(sql, { replacements: { id: id }, type: db.QueryTypes.SELECT })
+    .then(result => {
+      console.log(result); // Muestra el resultado por consola
+      callback(null, result);
+    })
+    .catch(err => callback(err));
 };

@@ -22,7 +22,7 @@ function App() {
 
   useEffect(() => {
     // Verificar si hay un ID de usuario en el localStorage al cargar la aplicación
-    const empleadoId = localStorage.getItem("empleadoId");
+    const empleadoId = localStorage.getItem("usuarioId");
     if (empleadoId) {
       setIsLoggedIn(true);
     }
