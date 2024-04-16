@@ -1,6 +1,11 @@
 import React from "react";
 
 export default function Header() {
+  const cerrarSesion = () => { //Al cerrar sesion borra el localstorage y recarga la pagina
+    localStorage.clear();
+    window.location.reload();
+  };
+
   return (
     <header className="fixed top-0 w-full z-50 bg-white h-30">
       <div className="container-xl flex justify-between items-center px-4 py-2 mx-auto relative z-10 shadow-md p-40">
@@ -9,12 +14,11 @@ export default function Header() {
           <h3 className="titulo">WorkZen</h3>
         </div>
         <div className="flex">
-
           <button><img src="./images/search.png" className="h-8 mr-3.5" alt="" /></button>
           <button className=" login boton-header bg-gray-500 text-white font-bold py-1 mr-3.5 px-3 rounded h-8">
             Iniciar Sesión
           </button>
-          <button className=" logout boton-header bg-gray-500 text-white font-bold py-1 px-3 rounded h-8">
+          <button className=" logout boton-header bg-gray-500 text-white font-bold py-1 px-3 rounded h-8" onClick={cerrarSesion}>
             Cerrar Sesión
           </button>
         </div>

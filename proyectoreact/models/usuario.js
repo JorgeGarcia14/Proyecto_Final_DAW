@@ -1,8 +1,21 @@
-// models/usuario.js
+import db from '../db.js';
 
-const db = require('../db');
+export const getUsuario = (usuario, callback) => {
+    const sql = 'SELECT * FROM usuarios WHERE Correo = :Correo';
+    db.query(sql, { replacements: { Correo: usuario }, type: db.QueryTypes.SELECT })
+        .then(result => {
+            console.log(result); // Muestra el resultado por consola
+            callback(null, result);
+        })
+        .catch(err => callback(err));
+};
 
-exports.getUsuario = (usuario, callback) => {
-    const sql = 'SELECT * FROM usuarios WHERE Correo = ?';
-    db.query(sql, [usuario], callback);
-}
+export const getUsuarioId = (correo, callback) => {
+    const sql = 'SELECT e.id FROM empleados e, usuarios u WHERE e.correo = u.correo AND u.correo = :correo';
+    db.query(sql, { replacements: { correo: correo }, type: db.QueryTypes.SELECT })
+        .then(result => {
+            console.log(result); // Muestra el resultado por consola
+            callback(null, result);
+        })
+        .catch(err => callback(err));
+};

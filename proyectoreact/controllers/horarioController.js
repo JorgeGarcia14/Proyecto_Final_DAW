@@ -1,13 +1,11 @@
-//Usuarios Controller
-const Horario = require('../models/horario');
+import { getHorario as getHorarioModel } from '../models/horario.js';
 
-exports.getHorario = (req, res) => {
+export const getHorario = (req, res) => {
     const EmpleadoID = req.params.EmpleadoID;
-    Horario.getHorario(EmpleadoID, (err, horario) => {
+    getHorarioModel(EmpleadoID, (err, horario) => {
         if (err) {
             res.status(500).send(err);
-        }
-        else{
+        } else {
             res.json(horario);
         }
     });

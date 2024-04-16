@@ -1,9 +1,11 @@
 // routes/usuariosRoutes.js
 
-const express = require('express');
+import express from 'express';
+import {getUsuario, getUsuarioId} from '../controllers/usuariosController.js';
+
 const router = express.Router();
-const usuariosController = require('../controllers/usuariosController');
 
-router.get('/:correo', usuariosController.getUsuario);
+router.get('/:correo',getUsuario);
+router.get('/id/:correo',getUsuarioId);
 
-module.exports = router;
+export default router;

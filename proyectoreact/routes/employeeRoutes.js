@@ -1,10 +1,11 @@
 // routes/employeeRoutes.js
 
-const express = require('express');
+import express from 'express';
+import { getEmployee, getEmployees } from '../controllers/employeeController.js';
+
 const router = express.Router();
-const employeeController = require('../controllers/employeeController');
 
-router.get('/', employeeController.getEmployees);
-router.get('/:id', employeeController.getEmployee);
+router.get('/', getEmployees);
+router.get('/:id',getEmployee);
 
-module.exports = router;
+export default router;

@@ -1,12 +1,19 @@
 // app.js
 
-const express = require('express');
-const path = require('path');
-const employeeRoutes = require('./routes/employeeRoutes');
-const usuariosRoutes = require('./routes/usuariosRoutes');
-const horarioRoutes = require('./routes/horarioRoutes');
-const cors = require('cors');
+import express from 'express';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import path from 'path';
+import employeeRoutes from './routes/employeeRoutes.js';
+import usuariosRoutes from './routes/usuariosRoutes.js';
+import horarioRoutes from './routes/horarioRoutes.js';
+import cors from 'cors';
+import db from './db.js';
+
 const app = express();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 app.use(express.static(path.join(__dirname, 'client/src')));
 
@@ -23,3 +30,15 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Servidor Express escuchando en el puerto ${PORT}`);
 });
+
+async function connectToDB() {
+  try {
+    await db.authenticate();
+    db.sync();
+    console.log('Conexión a la base de datos establecida correctamente.');
+  } catch (error) {
+    console.error('No se pudo conectar a la base de datos:', error);
+  }
+}
+
+connectToDB();

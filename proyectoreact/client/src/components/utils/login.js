@@ -8,16 +8,25 @@ function Login({ onLogin }) {
     event.preventDefault();
 
     try {
-      const response = await fetch( //Logica para manejar el incio de sesion
+      const response = await fetch(
         `http://localhost:5000/api/usuario/${correo}`
       );
-
-      if (response.ok) { //Si el usuario existe
+  
+      if (response.ok) {
         const data = await response.json();
         console.log(data);
-
-        if (data[0].Contraseña === contraseña) {//Si la contraseña es correcta
-          onLogin();//Se inicia sesion
+  
+        if (data[0].contraseña === contraseña) {
+          // Hacer una segunda solicitud para obtener el ID del usuario
+          const responseId = await fetch(`http://localhost:5000/api/usuario/id/${correo}`);
+          if (responseId.ok) {
+            const dataId = await responseId.json();
+            localStorage.setItem('usuarioId', dataId[0].id);
+            onLogin(); //Se inicia sesion
+          } else {
+            throw new Error('Error al obtener el ID del usuario');
+          }
+          
         } else {
           document.getElementById("mensajes-error-login").innerHTML =
             "Contraseña incorrecta";
@@ -28,8 +37,8 @@ function Login({ onLogin }) {
       }
     } catch (error) {
       document.getElementById("mensajes-error-login").innerHTML =
-        "Usuario no encontrado";
-      console.error("Error:", error);
+        "Error al iniciar sesión";
+      console.error('Error:', error);
     }
   };
 
