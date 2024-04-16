@@ -26,11 +26,11 @@ function Horario() {
   return (
     <div>
         
-            {horario[0].Dia}
+            {horario[0].dia}
         
 
      
-            {horario[0].HorasSemanalesTotales}
+            {horario[0].horassemanalestotales}
         
 
     </div>

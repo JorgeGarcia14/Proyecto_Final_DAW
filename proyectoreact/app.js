@@ -23,7 +23,7 @@ app.use('/api/usuario', usuariosRoutes);
 app.use('/api/horario', horarioRoutes);
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/src', 'index.html'));
+  res.sendFile(path.join(__dirname, 'client/public', 'index.html'));
 });
 
 const PORT = process.env.PORT || 5000;
