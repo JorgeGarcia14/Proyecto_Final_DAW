@@ -3,18 +3,31 @@ import axios from "axios";
 
 function Contactos() {
   const [empleados, setEmpleados] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/empleado`) // Tiempo de espera de 5 segundos
-      .then((response) => {
-        console.log("Respuesta de la API:", response);
-        setEmpleados(response.data[0]);
+    console.log("Hola")
+    axios.get('http://localhost:5000/api/empleado/')
+      .then(response => {
+        if (Array.isArray(response.data)) {
+          setEmpleados(response.data);
+        } else {
+          console.error('La respuesta de la API no es un array:', response.data);
+        }
       })
-      .catch((error) => {
-        console.error("Error al hacer la llamada a la API:", error);
+      .catch(error => {
+        console.error('Hubo un error al obtener los datos:', error);
+        setError(error);
       });
   }, []);
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   return (
     <>
@@ -49,7 +62,7 @@ function Contactos() {
 
       <div className="flex justify-center items-center mt-8">
         <div className="grid grid-cols-3 gap-4 ">
-          {empleados.map((empleado, index) => (
+        {Array.isArray(empleados) && empleados.map((empleado, index) => (
             <div
               key={index}
               className="bg-white shadow p-4 w-auto h-auto hover:bg-slate-100 transition-colors duration-500"
