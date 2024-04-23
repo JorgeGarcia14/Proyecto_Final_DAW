@@ -8,7 +8,8 @@ function Perfil() {
 
   useEffect(() => {
     const id = localStorage.getItem('usuarioId');
-    axios
+    try{
+      axios
       .get(`http://localhost:5000/api/empleado/${id}`)
       .then((response) => {
         console.log(response.data);
@@ -16,11 +17,15 @@ function Perfil() {
       })
       .catch((error) => {
         console.error("Error:", error);
-      });
+      })
+      ;}
+      catch(error){
+        console.error("Error:", error);
+      }
   }, []);
 
   if (!employee || !employee[0]) {
-    return <div>Cargando...</div>;
+    return <div className="spinner"></div>;
   }
 
   return (

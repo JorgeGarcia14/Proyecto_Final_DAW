@@ -6,6 +6,6 @@ import { getEmployee, getEmployees } from '../controllers/employeeController.js'
 const router = express.Router();
 
 router.get('/', getEmployees);
-router.get('/:id',getEmployee);
+router.get('/:empleado_id',getEmployee);
 
 export default router;

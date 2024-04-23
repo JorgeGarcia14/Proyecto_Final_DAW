@@ -11,7 +11,7 @@ export const getUsuario = (usuario, callback) => {
 };
 
 export const getUsuarioId = (correo, callback) => {
-    const sql = 'SELECT e.id FROM empleados e, usuarios u WHERE e.correo = u.correo AND u.correo = :correo';
+    const sql = 'SELECT e.empleado_id FROM empleados e, usuarios u WHERE e.correo = u.correo AND u.correo = :correo';
     db.query(sql, { replacements: { correo: correo }, type: db.QueryTypes.SELECT })
         .then(result => {
             console.log(result); // Muestra el resultado por consola
@@ -19,3 +19,16 @@ export const getUsuarioId = (correo, callback) => {
         })
         .catch(err => callback(err));
 };
+
+export const getUsuarioRol = (correo, callback) => {
+    const sql = "SELECT e.rol FROM empleados e, usuarios u WHERE e.correo = u.correo AND u.correo = :correo";
+    
+    db.query(sql, { replacements: { correo: correo }, type: db.QueryTypes.SELECT })
+      .then(result => {
+        callback(null, result);
+      })
+      .catch(err => {
+        callback(err);
+      });
+  };
+
