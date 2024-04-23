@@ -11,7 +11,7 @@ export const getEmployees = (callback) => {
 };
 
 export const getEmployee = (id, callback) => { //Ruta que devuelve a un empleado por id
-  const sql = 'SELECT * FROM empleados WHERE id = :id';
+  const sql = 'SELECT * FROM empleados WHERE empleado_id = :id';
   db.query(sql, { replacements: { id: id }, type: db.QueryTypes.SELECT })
     .then(result => {
       callback(null, result);

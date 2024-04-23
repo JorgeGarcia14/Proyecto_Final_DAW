@@ -1,7 +1,7 @@
 import { getEmployee as getEmployeeModel, getEmployees as getEmployeesModel } from '../models/employee.js';
 
 export const getEmployee = (req, res) => {
-  const id = req.params.id;
+  const id = req.params.empleado_id;
   getEmployeeModel(id, (err, employee) => {
     if (err) {
       res.status(500).send(err);

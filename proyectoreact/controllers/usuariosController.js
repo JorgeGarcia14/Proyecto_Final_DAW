@@ -1,4 +1,4 @@
-import { getUsuario as getUsuarioModel, getUsuarioId as getUsuarioIdModel } from '../models/usuario.js';
+import { getUsuario as getUsuarioModel, getUsuarioId as getUsuarioIdModel, getUsuarioRol as getUsuarioRolModel } from '../models/usuario.js';
 
 export const getUsuario = (req, res) => {
     const correo = req.params.correo;
@@ -22,3 +22,13 @@ export const getUsuarioId = (req, res) => {
     });
 };
 
+export const getUsuarioRol = (req, res) => {
+    const correo = req.params.correo;
+    getUsuarioRolModel(correo, (err, rol) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.json(rol);
+        }
+    });
+};

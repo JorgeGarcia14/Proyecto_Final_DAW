@@ -15,9 +15,6 @@ export default function Header() {
         </div>
         <div className="flex">
           <button><img src="./images/search.png" className="h-8 mr-3.5" alt="" /></button>
-          <button className=" login boton-header bg-gray-500 text-white font-bold py-1 mr-3.5 px-3 rounded h-8">
-            Iniciar Sesión
-          </button>
           <button className=" logout boton-header bg-gray-500 text-white font-bold py-1 px-3 rounded h-8" onClick={cerrarSesion}>
             Cerrar Sesión
           </button>

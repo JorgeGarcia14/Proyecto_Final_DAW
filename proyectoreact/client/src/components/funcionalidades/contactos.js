@@ -9,11 +9,8 @@ function Contactos() {
     console.log("Hola")
     axios.get('http://localhost:5000/api/empleado/')
       .then(response => {
-        if (Array.isArray(response.data)) {
           setEmpleados(response.data);
-        } else {
-          console.error('La respuesta de la API no es un array:', response.data);
-        }
+          console.log('Empleados: ', response.data);
       })
       .catch(error => {
         console.error('Hubo un error al obtener los datos:', error);
@@ -21,8 +18,8 @@ function Contactos() {
       });
   }, []);
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
+  if (!empleados || !empleados[0]) {
+    return <div className="spinner"></div>;
   }
 
   if (error) {

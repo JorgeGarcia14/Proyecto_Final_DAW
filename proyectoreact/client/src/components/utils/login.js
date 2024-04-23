@@ -19,9 +19,12 @@ function Login({ onLogin }) {
         if (data[0].contraseña === contraseña) {
           // Hacer una segunda solicitud para obtener el ID del usuario
           const responseId = await fetch(`http://localhost:5000/api/usuario/id/${correo}`);
+          const responseRol = await fetch(`http://localhost:5000/api/usuario/rol/${correo}`);
           if (responseId.ok) {
             const dataId = await responseId.json();
-            localStorage.setItem('usuarioId', dataId[0].id);
+            const dataRol = await responseRol.json();
+            localStorage.setItem('usuarioId', dataId[0].empleado_id);
+            localStorage.setItem('usuarioRol', dataRol[0].rol);
             onLogin(); //Se inicia sesion
           } else {
             throw new Error('Error al obtener el ID del usuario');

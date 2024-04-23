@@ -5,28 +5,37 @@ import axios from "axios"; //AXIOS permite hacer peticiones HTTP desde el client
 
 function Horario() {
   const [horario, setHorario] = useState(null);
+  const [datosEmple, setDatosEmple] = useState(null);
 
   useEffect(() => {
     const id = localStorage.getItem('usuarioId');
-    axios
-      .get(`http://localhost:5000/api/horario/${id}`)
-      .then((response) => {
-        console.log(response.data);
-        setHorario(response.data);
-      })
-      .catch((error) => {
+  
+    const fetchData = async () => {
+      try {
+        const responseHorario = await axios.get(`http://localhost:5000/api/horario/${id}`);
+        console.log(responseHorario.data);
+        setHorario(responseHorario.data);
+  
+        const responseEmple = await fetch(`http://localhost:5000/api/empleado/${id}`); // Datos del empleado para ese horario
+        const datos = await responseEmple.json();
+        setDatosEmple(datos);
+        console.log(datos);
+      } catch (error) {
         console.error("Error:", error);
-      });
+      }
+    };
+  
+    fetchData();
   }, []);
 
-  if (!horario || !horario[0]) {
-    return <div>Cargando...</div>;
+  if (!horario || !horario[0] || !datosEmple || !datosEmple[0]) {
+    return <div className="spinner"></div>;
   }
 
   return (
     <div>
         
-            {horario[0].dia}
+            <p>Hola {datosEmple[0].nombre} {horario[0].dia}</p>
         
 
      
