@@ -6,6 +6,7 @@ import Contactos from "./components/funcionalidades/contactos";
 import Horario from "./components/funcionalidades/horario";
 import Login from "./components/utils/login";
 import Caja from "./components/utils/caja";
+import Sugerencias from "./components/funcionalidades/sugerencias";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Maneja el inicio de sesion
@@ -40,9 +41,11 @@ function App() {
       {isLoggedIn ? (
         <>
           <Caja className="flex-grow">
+            {visible === "" && <img src="./images/empresa.jpg" alt="Logo de la empresa" className="object-cover w-full h-full"/>}
             {visible === "perfil"&& <Perfil />}
             {visible === "contactos" && <Contactos />}
             {visible === "horarios" && <Horario />}
+            {visible === "sugerencias" && <Sugerencias />}
             {/* Agrega aquí los demás componentes */}
           </Caja>
         </>

@@ -25,7 +25,7 @@ body {
 /*INICIO DE SESION*/
 
 .caja-login {
-  height: calc(100vh - 60px - 36px); /*Evitando el scroll en la pagina*/
+  height: calc(100vh - 60px - 36px);
   background-color: #8399A1;
 }
 
@@ -64,7 +64,6 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-  width: 30%;
   height: 100%;
   z-index: 10;
 }
@@ -78,13 +77,12 @@ body {
 }
 
 .boton-menu {
-  /* Estilos base del botón */
   width: 240px;
-  font-size: medium; /* Tamaño base del texto */
-  padding: 8px 16px; /* Relleno del botón */
-  border: none; /* Quitamos el borde */
+  font-size: medium;
+  padding: 8px 16px;
+  border: none; 
   margin-left: 5px;
-  transition: box-shadow 0.3s; /* Transición para el cambio en la sombra */
+  transition: box-shadow 0.3s;
 }
 
 .boton-menu:hover { 
@@ -94,12 +92,17 @@ body {
 
 header {
   position: relative;
-  z-index: 20; /* Asegura que el Header esté por encima del menú */
+  z-index: 20; 
 }
 
 .caja-perfil{
   margin-right: 100px;
   width: 70em
+}
+
+.caja-texto{
+  height: 45vh;
+  resize: none;
 }
 
 /*CIRCULO DE CARGANDO*/
