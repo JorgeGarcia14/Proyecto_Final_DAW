@@ -19,3 +19,15 @@ export const getEmployee = (id, callback) => { //Ruta que devuelve a un empleado
     })
     .catch(err => callback(err));
 };
+
+export const getEmployeesByName = (nombre, callback) => {
+  const sql = "SELECT * FROM empleados WHERE nombre LIKE :nombre";
+  
+  db.query(sql, { replacements: { nombre: `%${nombre}%` }, type: db.QueryTypes.SELECT })
+    .then(result => {
+      callback(null, result);
+    })
+    .catch(err => {
+      callback(err);
+    });
+};

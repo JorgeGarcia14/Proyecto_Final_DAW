@@ -1,30 +1,46 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 
 function Contactos() {
   const [empleados, setEmpleados] = useState([]);
-  const [error, setError] = useState(null);
+
+  //Estados para buscar empleado
+  const [search, setSearch] = useState("");
+  const [results, setResults] = useState([]);
 
   useEffect(() => {
-    console.log("Hola")
-    axios.get('http://localhost:5000/api/empleado/')
-      .then(response => {
-          setEmpleados(response.data);
-          console.log('Empleados: ', response.data);
-      })
-      .catch(error => {
-        console.error('Hubo un error al obtener los datos:', error);
-        setError(error);
-      });
+    // Suponiendo que tienes una función para obtener todos los empleados
+    const fetchEmpleados = async () => {
+      const response = await fetch("http://localhost:5000/api/empleado");
+      const data = await response.json();
+
+      setEmpleados(data);
+      setResults(data);
+    };
+
+    fetchEmpleados();
   }, []);
+
+  const handleSearch = async (event) => {
+    event.preventDefault();
+    console.log("Buscando...");
+    if (search) {
+      const response = await fetch(
+        `http://localhost:5000/api/empleado/nombre/${search}`
+      );
+      const data = await response.json();
+
+      setResults(data);
+    } else {
+      setResults(empleados);
+    }
+  };
 
   if (!empleados || !empleados[0]) {
     return <div className="spinner"></div>;
   }
 
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
+
+  const displayedEmpleados = search ? results : empleados;
 
   return (
     <>
@@ -36,7 +52,10 @@ function Contactos() {
 
       <div className="flex items-center justify-center">
         <div className="w-3/4">
-          <form className="flex items-center justify-center">
+          <form
+            className="flex items-center justify-center"
+            onSubmit={handleSearch}
+          >
             <label htmlFor="search" className="sr-only">
               Buscar compañero
             </label>
@@ -46,6 +65,8 @@ function Contactos() {
               name="search"
               placeholder="Buscar a un compañero/a"
               className="w-full px-3 py-2 border rounded-l-md"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             />
             <button
               type="submit"
@@ -59,42 +80,59 @@ function Contactos() {
 
       <div className="flex justify-center items-center mt-8">
         <div className="grid grid-cols-3 gap-4 ">
-        {Array.isArray(empleados) && empleados.map((empleado, index) => (
-            <div
-              key={index}
-              className="bg-white shadow p-4 w-auto h-auto hover:bg-slate-100 transition-colors duration-500"
-            >
-              <div className="flex justify-between items-center">
-                <p>
-                  <span className="textos-importantes">Nombre: </span>
-                  {empleado.nombre}
-                </p>
-                <img src="./images/icons/person.svg" className="w-4 ml-4" alt = "Persona"/>
+          {Array.isArray(displayedEmpleados) &&
+            displayedEmpleados.map((empleado, index) => (
+              <div
+                key={index}
+                className="bg-white shadow p-4 w-auto h-auto hover:bg-slate-100 transition-colors duration-500"
+              >
+                <div className="flex justify-between items-center">
+                  <p>
+                    <span className="textos-importantes">Nombre: </span>
+                    {empleado.nombre}
+                  </p>
+                  <img
+                    src="./images/icons/person.svg"
+                    className="w-4 ml-4"
+                    alt="Persona"
+                  />
+                </div>
+                <div className="flex justify-between items-center">
+                  <p>
+                    <span className="textos-importantes">Puesto: </span>
+                    {empleado.puesto}
+                  </p>
+                  <img
+                    src="./images/icons/position.svg"
+                    className="w-4 ml-4"
+                    alt="Posicion"
+                  />
+                </div>
+                <div className="flex justify-between items-center">
+                  <p>
+                    <span className="textos-importantes">Correo: </span>
+                    {empleado.correo}
+                  </p>
+                  <img
+                    src="./images/icons/email.svg"
+                    className="w-4 ml-4"
+                    alt="email"
+                  />
+                </div>
+                <div className="flex justify-between items-center">
+                  <p>
+                    <span className="textos-importantes">Teléfono: </span>
+                    {empleado.telefono}
+                  </p>
+                  <img
+                    src="./images/icons/phone.svg"
+                    className="w-4 ml-4"
+                    alt="telefono"
+                  />
+                </div>
+                {/* Muestra aquí los demás datos del empleado */}
               </div>
-              <div className="flex justify-between items-center">
-                <p>
-                  <span className="textos-importantes">Puesto: </span>
-                  {empleado.puesto}
-                </p>
-                <img src="./images/icons/position.svg" className="w-4 ml-4" alt="Posicion" />
-              </div>
-              <div className="flex justify-between items-center">
-                <p>
-                  <span className="textos-importantes">Correo: </span>
-                  {empleado.correo}
-                </p>
-                <img src="./images/icons/email.svg" className="w-4 ml-4" alt ="email"/>
-              </div>
-              <div className="flex justify-between items-center">
-                <p>
-                  <span className="textos-importantes">Teléfono: </span>
-                  {empleado.telefono}
-                </p>
-                <img src="./images/icons/phone.svg" className="w-4 ml-4" alt = "telefono"/>
-              </div>
-              {/* Muestra aquí los demás datos del empleado */}
-            </div>
-          ))}
+            ))}
         </div>
       </div>
     </>
