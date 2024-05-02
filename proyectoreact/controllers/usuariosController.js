@@ -1,9 +1,9 @@
 //Usuarios Controller
-const Usuario = require('../models/usuario');
+import { getUsuario as getUsuarioModel, getUsuarioId as getUsuarioIdModel, getUsuarioRol as getUsuarioRolModel } from '../models/usuario.js';
 
-exports.getUsuario = (req, res) => {
+export const getUsuario = (req, res) => {
     const correo = req.params.correo;
-    Usuario.getUsuario(correo, (err, horario) => {
+    getUsuario(correo, (err, horario) => {
         if (err) {
             res.status(500).send(err);
         }
