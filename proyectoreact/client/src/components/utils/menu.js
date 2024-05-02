@@ -8,7 +8,7 @@ const Menu = ({ visible, toggleVisibility }) => {
       <div className="caja-menu flex flex-col space-y-4">
         <button className="boton-menu btn btn-dark text-left" onClick={() => toggleVisibility('perfil')}>Perfil</button>
         <button className="boton-menu btn btn-dark text-left" onClick={() => toggleVisibility('contactos')}>Contactos</button>
-        <button className="boton-menu btn btn-dark text-left" onClick={() => toggleVisibility('horarios')}>Horarios</button>
+        <button className="boton-menu btn btn-dark text-left" onClick={() => toggleVisibility('horarios')}>Calendario</button>
         <button className="boton-menu btn btn-dark text-left" onClick={() => toggleVisibility('nominas')}>Nóminas</button>
         <button className="boton-menu btn btn-dark text-left" onClick={() => toggleVisibility('sugerencias')}>Sugerencias</button>
         <button className="boton-menu btn btn-dark text-left" onClick={() => toggleVisibility('vacantes')}>Vacantes</button>
