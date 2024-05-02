@@ -10,9 +10,9 @@ export const getEmployees = (callback) => {
     .catch(err => callback(err));
 };
 
-export const getEmployee = (id, callback) => { //Ruta que devuelve a un empleado por id
-  const sql = 'SELECT * FROM empleados WHERE empleado_id = :id';
-  db.query(sql, { replacements: { id: id }, type: db.QueryTypes.SELECT })
+export const getEmployee = (empleado_id, callback) => { //Ruta que devuelve a un empleado por id
+  const sql = 'SELECT * FROM empleados WHERE empleado_id = :empleado_id';
+  db.query(sql, { replacements: { empleado_id: empleado_id }, type: db.QueryTypes.SELECT })
     .then(result => {
       callback(null, result);
       console.log(result); // Muestra el resultado por consola
