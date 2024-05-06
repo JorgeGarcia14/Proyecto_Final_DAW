@@ -147,3 +147,52 @@ header {
     transform: translateY(0);
   }
 }
+
+/*ESTILO PARA NOMINAS*/
+.wrapper {
+  border: 2px solid #000;
+  padding: 20px;
+  max-width: 600px;
+  text-align: center;
+  margin: auto; /* Alineación horizontal al centro */
+  display: flex;
+  justify-content: center; /* Alineación vertical al centro */
+  align-items: center; /* Alineación vertical al centro */
+}
+
+.header h1 {
+  margin: 0;
+}
+
+.header p {
+  margin-top: 5px;
+}
+
+.employee-info p,
+.bank-info p {
+  margin: 5px 0;
+}
+
+.payroll-details {
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #000;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.signature p {
+  margin: 5px 0;
+}
