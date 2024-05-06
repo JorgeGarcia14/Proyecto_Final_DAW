@@ -58,11 +58,11 @@ return (
             <p><strong>Fecha de pago:</strong> 30 de abril de 2024</p>
         </div>
         <div className="payroll-details">
-            <table>
+            <table className="tabla-nomina">
                 <tr>
                     <th>Concepto</th>
                     <th>Detalle</th>
-                    <th>Monto ($)</th>
+                    <th>Cantidad ($)</th>
                 </tr>
                 <tr>
                     <td>Salario base</td>

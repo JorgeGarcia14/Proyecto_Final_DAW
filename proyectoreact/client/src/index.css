@@ -177,19 +177,19 @@ header {
   margin-top: 20px;
 }
 
-table {
+.tabla-nomina {
   width: 100%;
   border-collapse: collapse;
 }
 
-th,
-td {
+.tabla-nomina th td
+ {
   border: 1px solid #000;
   padding: 8px;
   text-align: left;
 }
 
-th {
+.tabla-nomina th {
   background-color: #f2f2f2;
 }
 
