@@ -4,7 +4,7 @@ import { getUsuario as getUsuarioModel, getUsuarioId as getUsuarioIdModel, getUs
 
 export const getUsuario = (req, res) => {
     const correo = req.params.correo;
-    getUsuario(correo, (err, horario) => {
+    getUsuarioModel(correo, (err, horario) => {
         if (err) {
             res.status(500).send(err);
         }
