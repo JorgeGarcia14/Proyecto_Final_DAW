@@ -1,6 +1,8 @@
-import { getEmployee as getEmployeeModel, getEmployees as getEmployeesModel, getEmployeesByName as getEmployeesByNameModel } from '../models/modelosAntiguos/employee.js';
+// employeeController.js
 
-export const getEmployee = (req, res) => {
+const { getEmployee: getEmployeeModel, getEmployees: getEmployeesModel, getEmployeesByName: getEmployeesByNameModel } = require('../models/modelosAntiguos/employee');
+
+const getEmployee = (req, res) => {
   const id = req.params.empleado_id;
   getEmployeeModel(id, (err, employee) => {
     if (err) {
@@ -11,7 +13,7 @@ export const getEmployee = (req, res) => {
   });
 };
 
-export const getEmployees = (req, res) => {
+const getEmployees = (req, res) => {
   getEmployeesModel((err, employees) => {
     if (err) {
       res.status(500).send(err);
@@ -21,7 +23,7 @@ export const getEmployees = (req, res) => {
   });
 };
 
-export const getEmployeesByName = (req, res) => {
+const getEmployeesByName = (req, res) => {
   const name = req.params.name;
   getEmployeesByNameModel(name, (err, employees) => {
     if (err) {
@@ -31,3 +33,5 @@ export const getEmployeesByName = (req, res) => {
     }
   });
 };
+
+module.exports = { getEmployee, getEmployees, getEmployeesByName };

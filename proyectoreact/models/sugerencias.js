@@ -1,19 +1,11 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('sugerencia', {
+  return sequelize.define('sugerencias', {
     sugerencia_id: {
       autoIncrement: true,
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true
-    },
-    nombre: {
-      type: DataTypes.STRING(255),
-      allowNull: true
-    },
-    descripcion: {
-      type: DataTypes.STRING(255),
-      allowNull: true
     },
     empleado_id_fk: {
       type: DataTypes.INTEGER,
@@ -22,15 +14,23 @@ module.exports = function(sequelize, DataTypes) {
         model: 'empleados',
         key: 'empleado_id'
       }
+    },
+    nombre: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    descripcion: {
+      type: DataTypes.TEXT,
+      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'sugerencia',
+    tableName: 'sugerencias',
     schema: 'public',
-    timestamps: true,
+    timestamps: false,
     indexes: [
       {
-        name: "sugerencia_pkey",
+        name: "sugerencias_pkey",
         unique: true,
         fields: [
           { name: "sugerencia_id" },

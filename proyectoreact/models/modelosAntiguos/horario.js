@@ -1,6 +1,6 @@
-import db from '../../db.js';
+const db = require('../../db');
 
-export const getHorario = (id, callback) => { //Ruta que devuelve a un horario por id de empleado
+const getHorario = (id, callback) => { //Ruta que devuelve a un horario por id de empleado
     const sql = 'SELECT * FROM horarios WHERE empleado_id_fk = :id';
     db.query(sql, { replacements: { id: id }, type: db.QueryTypes.SELECT })
         .then(result => {
@@ -9,3 +9,6 @@ export const getHorario = (id, callback) => { //Ruta que devuelve a un horario p
         })
         .catch(err => callback(err));
 };
+
+
+module.exports = { getHorario };

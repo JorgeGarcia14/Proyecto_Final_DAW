@@ -1,11 +1,10 @@
-// routes/sugerenciasRoutes.js
+// sugerenciasRoutes.js
 
-import express from 'express';
-import { getSugerencias} from '../controllers/sugerenciasController.js';
-
+const express = require('express');
+const { getSugerencias } = require('../controllers/sugerenciasController');
 
 const router = express.Router();
 
 router.get('/', getSugerencias);
 
-export default router;
+module.exports = router;

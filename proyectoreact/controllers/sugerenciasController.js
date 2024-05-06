@@ -1,6 +1,8 @@
-import {getSugerencias as getSugerenciasModel} from '../models/modelosAntiguos/sugerencias.js';
+// sugerenciasController.js
 
-export const getSugerencias = (req, res) => {
+const { getSugerencias: getSugerenciasModel } = require('../models/modelosAntiguos/sugerencias');
+
+const getSugerencias = (req, res) => {
     getSugerenciasModel((err, sugerencias) => {
         if (err) {
           res.status(500).send({ message: err.message });
@@ -8,4 +10,6 @@ export const getSugerencias = (req, res) => {
           res.send(sugerencias);
         }
     });
-}
+};
+
+module.exports = { getSugerencias };
