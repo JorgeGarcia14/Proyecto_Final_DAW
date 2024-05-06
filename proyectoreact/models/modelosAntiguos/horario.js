@@ -1,4 +1,4 @@
-import db from '../db.js';
+import db from '../../db.js';
 
 export const getHorario = (id, callback) => { //Ruta que devuelve a un horario por id de empleado
     const sql = 'SELECT * FROM horarios WHERE empleado_id_fk = :id';

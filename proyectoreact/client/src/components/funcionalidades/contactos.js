@@ -8,7 +8,6 @@ function Contactos() {
   const [results, setResults] = useState([]);
 
   useEffect(() => {
-    // Suponiendo que tienes una función para obtener todos los empleados
     const fetchEmpleados = async () => {
       const response = await fetch("http://localhost:5000/api/empleado");
       const data = await response.json();

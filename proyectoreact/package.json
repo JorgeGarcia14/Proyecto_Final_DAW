@@ -21,6 +21,7 @@
     "pg-hstore": "^2.3.4",
     "postcss": "^8.4.38",
     "sequelize": "^6.37.3",
+    "sequelize-auto": "^0.8.8",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
   },
   "devDependencies": {

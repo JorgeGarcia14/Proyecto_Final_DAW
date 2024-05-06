@@ -1,4 +1,4 @@
-import { getUsuario as getUsuarioModel, getUsuarioId as getUsuarioIdModel, getUsuarioRol as getUsuarioRolModel } from '../models/usuario.js';
+import { getUsuario as getUsuarioModel, getUsuarioId as getUsuarioIdModel, getUsuarioRol as getUsuarioRolModel } from '../models/modelosAntiguos/usuario.js';
 
 export const getUsuario = (req, res) => {
     const correo = req.params.correo;

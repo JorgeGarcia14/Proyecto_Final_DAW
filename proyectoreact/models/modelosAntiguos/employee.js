@@ -1,4 +1,4 @@
-import db from '../db.js';
+import db from '../../db.js';
 
 export const getEmployees = (callback) => {
   const sql = 'SELECT * FROM empleados';
@@ -20,10 +20,14 @@ export const getEmployee = (id, callback) => { //Ruta que devuelve a un empleado
     .catch(err => callback(err));
 };
 
-export const getEmployeesByName = (nombre, callback) => {
-  const sql = "SELECT * FROM empleados WHERE nombre LIKE :nombre";
-  
-  db.query(sql, { replacements: { nombre: `%${nombre}%` }, type: db.QueryTypes.SELECT })
+export const getEmployeesByName = (nombreCompleto, callback) => {
+  const palabras = nombreCompleto.split(' ');
+  const condiciones = palabras.map((palabra, index) => `(nombre LIKE :palabra${index} OR apellido1 LIKE :palabra${index} OR apellido2 LIKE :palabra${index})`).join(' AND ');
+  const sql = `SELECT * FROM empleados WHERE ${condiciones}`;
+
+  const replacements = palabras.reduce((obj, palabra, index) => ({ ...obj, [`palabra${index}`]: `%${palabra}%` }), {});
+
+  db.query(sql, { replacements: replacements, type: db.QueryTypes.SELECT })
     .then(result => {
       callback(null, result);
     })

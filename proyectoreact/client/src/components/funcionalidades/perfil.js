@@ -50,7 +50,7 @@ function Perfil() {
           <tbody>
             <tr>
               <td className="textos-importantes font-semibold p-2">Nombre:</td>
-              <td className="p-2">{`${employee[0].nombre} ${employee[0].apellido1} ${employee[0].apellido2}s`}</td>
+              <td className="p-2">{`${employee[0].nombre} ${employee[0].apellido1} ${employee[0].apellido2}`}</td>
             </tr>
             <tr>
               <td className="textos-importantes font-semibold p-2">Puesto:</td>

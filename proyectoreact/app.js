@@ -7,6 +7,7 @@ import path from 'path';
 import employeeRoutes from './routes/employeeRoutes.js';
 import usuariosRoutes from './routes/usuariosRoutes.js';
 import horarioRoutes from './routes/horarioRoutes.js';
+import sugerenciasRoutes from './routes/sugerenciasRoutes.js';
 import cors from 'cors';
 import db from './db.js';
 
@@ -21,6 +22,7 @@ app.use(cors());
 app.use('/api/empleado', employeeRoutes);
 app.use('/api/usuario', usuariosRoutes);
 app.use('/api/horario', horarioRoutes);
+app.use('/api/sugerencias',sugerenciasRoutes);
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/public', 'index.html'));
