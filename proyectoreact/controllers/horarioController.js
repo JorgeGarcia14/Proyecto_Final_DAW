@@ -1,4 +1,4 @@
-import { getHorario as getHorarioModel } from '../models/horario.js';
+import { getHorario as getHorarioModel } from '../models/modelosAntiguos/horario.js';
 
 export const getHorario = (req, res) => {
     const EmpleadoID = req.params.EmpleadoID;

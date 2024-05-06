@@ -1,4 +1,4 @@
-import db from '../db.js';
+import db from '../../db.js';
 
 export const getUsuario = (usuario, callback) => {
     const sql = 'SELECT * FROM usuarios WHERE Correo = :Correo';

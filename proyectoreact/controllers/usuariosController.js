@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 //Usuarios Controller
 import { getUsuario as getUsuarioModel, getUsuarioId as getUsuarioIdModel, getUsuarioRol as getUsuarioRolModel } from '../models/usuario.js';
+=======
+import { getUsuario as getUsuarioModel, getUsuarioId as getUsuarioIdModel, getUsuarioRol as getUsuarioRolModel } from '../models/modelosAntiguos/usuario.js';
+>>>>>>> 1ef73dcfd7b7015fd0ec9a81ee38c4f9f9e3cc8e
 
 export const getUsuario = (req, res) => {
     const correo = req.params.correo;

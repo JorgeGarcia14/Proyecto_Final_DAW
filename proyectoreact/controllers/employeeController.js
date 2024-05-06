@@ -1,4 +1,4 @@
-import { getEmployee as getEmployeeModel, getEmployees as getEmployeesModel, getEmployeesByName as getEmployeesByNameModel } from '../models/employee.js';
+import { getEmployee as getEmployeeModel, getEmployees as getEmployeesModel, getEmployeesByName as getEmployeesByNameModel } from '../models/modelosAntiguos/employee.js';
 
 export const getEmployee = (req, res) => {
   const id = req.params.empleado_id;

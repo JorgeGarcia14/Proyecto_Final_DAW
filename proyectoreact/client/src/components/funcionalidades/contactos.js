@@ -8,7 +8,6 @@ function Contactos() {
   const [results, setResults] = useState([]);
 
   useEffect(() => {
-    // Suponiendo que tienes una función para obtener todos los empleados
     const fetchEmpleados = async () => {
       const response = await fetch("http://localhost:5000/api/empleado");
       const data = await response.json();
@@ -43,7 +42,7 @@ function Contactos() {
   const displayedEmpleados = search ? results : empleados;
 
   return (
-    <>
+    <div className="overflow-auto max-h-[500px]">
       <div className="mt-8">
         <h1 className="titulo-textos text-center mb-4">
           Contacta con tus compañeros/as
@@ -79,7 +78,7 @@ function Contactos() {
       </div>
 
       <div className="flex justify-center items-center mt-8">
-        <div className="grid grid-cols-3 gap-4 ">
+        <div className="grid grid-cols-3 gap-4">
           {Array.isArray(displayedEmpleados) &&
             displayedEmpleados.map((empleado, index) => (
               <div
@@ -89,7 +88,7 @@ function Contactos() {
                 <div className="flex justify-between items-center">
                   <p>
                     <span className="textos-importantes">Nombre: </span>
-                    {empleado.nombre}
+                    {` ${empleado.nombre} ${empleado.apellido1} ${empleado.apellido2}`}
                   </p>
                   <img
                     src="./images/icons/person.svg"
@@ -135,7 +134,7 @@ function Contactos() {
             ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
