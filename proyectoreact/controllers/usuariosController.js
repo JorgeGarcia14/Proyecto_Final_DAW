@@ -1,6 +1,8 @@
-import { getUsuario as getUsuarioModel, getUsuarioId as getUsuarioIdModel, getUsuarioRol as getUsuarioRolModel } from '../models/modelosAntiguos/usuario.js';
+// usuariosController.js
 
-export const getUsuario = (req, res) => {
+const { getUsuario: getUsuarioModel, getUsuarioId: getUsuarioIdModel, getUsuarioRol: getUsuarioRolModel } = require('../models/modelosAntiguos/usuario');
+
+const getUsuario = (req, res) => {
     const correo = req.params.correo;
     getUsuarioModel(correo, (err, usuario) => {
         if (err) {
@@ -11,7 +13,7 @@ export const getUsuario = (req, res) => {
     });
 };
 
-export const getUsuarioId = (req, res) => {
+const getUsuarioId = (req, res) => {
     const correo = req.params.correo;
     getUsuarioIdModel(correo, (err, id) => {
         if (err) {
@@ -22,7 +24,7 @@ export const getUsuarioId = (req, res) => {
     });
 };
 
-export const getUsuarioRol = (req, res) => {
+const getUsuarioRol = (req, res) => {
     const correo = req.params.correo;
     getUsuarioRolModel(correo, (err, rol) => {
         if (err) {
@@ -33,3 +35,4 @@ export const getUsuarioRol = (req, res) => {
     });
 };
 
+module.exports = { getUsuario, getUsuarioId, getUsuarioRol };

@@ -1,6 +1,6 @@
-import db from '../../db.js';
+const db = require('../../db');
 
-export const getEmployees = (callback) => {
+const getEmployees = (callback) => {
   const sql = 'SELECT * FROM empleados';
   db.query(sql, { type: db.QueryTypes.SELECT })
     .then(result => {
@@ -10,7 +10,7 @@ export const getEmployees = (callback) => {
     .catch(err => callback(err));
 };
 
-export const getEmployee = (id, callback) => { //Ruta que devuelve a un empleado por id
+const getEmployee = (id, callback) => { //Ruta que devuelve a un empleado por id
   const sql = 'SELECT * FROM empleados WHERE empleado_id = :id';
   db.query(sql, { replacements: { id: id }, type: db.QueryTypes.SELECT })
     .then(result => {
@@ -20,7 +20,7 @@ export const getEmployee = (id, callback) => { //Ruta que devuelve a un empleado
     .catch(err => callback(err));
 };
 
-export const getEmployeesByName = (nombreCompleto, callback) => {
+const getEmployeesByName = (nombreCompleto, callback) => {
   const palabras = nombreCompleto.split(' ');
   const condiciones = palabras.map((palabra, index) => `(nombre LIKE :palabra${index} OR apellido1 LIKE :palabra${index} OR apellido2 LIKE :palabra${index})`).join(' AND ');
   const sql = `SELECT * FROM empleados WHERE ${condiciones}`;
@@ -35,3 +35,5 @@ export const getEmployeesByName = (nombreCompleto, callback) => {
       callback(err);
     });
 };
+
+module.exports = { getEmployees, getEmployee, getEmployeesByName };

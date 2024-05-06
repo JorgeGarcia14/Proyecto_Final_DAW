@@ -4,7 +4,6 @@ var _horarios = require("./horarios");
 var _nominas = require("./nominas");
 var _noticias = require("./noticias");
 var _permisos = require("./permisos");
-var _sugerencia = require("./sugerencia");
 var _sugerencias = require("./sugerencias");
 var _tareas = require("./tareas");
 var _usuarios = require("./usuarios");
@@ -16,7 +15,6 @@ function initModels(sequelize) {
   var nominas = _nominas(sequelize, DataTypes);
   var noticias = _noticias(sequelize, DataTypes);
   var permisos = _permisos(sequelize, DataTypes);
-  var sugerencia = _sugerencia(sequelize, DataTypes);
   var sugerencias = _sugerencias(sequelize, DataTypes);
   var tareas = _tareas(sequelize, DataTypes);
   var usuarios = _usuarios(sequelize, DataTypes);
@@ -26,8 +24,6 @@ function initModels(sequelize) {
   empleados.hasMany(horarios, { as: "horarios", foreignKey: "empleado_id_fk"});
   nominas.belongsTo(empleados, { as: "empleado_id_fk_empleado", foreignKey: "empleado_id_fk"});
   empleados.hasMany(nominas, { as: "nominas", foreignKey: "empleado_id_fk"});
-  sugerencia.belongsTo(empleados, { as: "empleado_id_fk_empleado", foreignKey: "empleado_id_fk"});
-  empleados.hasMany(sugerencia, { as: "sugerencia", foreignKey: "empleado_id_fk"});
   sugerencias.belongsTo(empleados, { as: "empleado_id_fk_empleado", foreignKey: "empleado_id_fk"});
   empleados.hasMany(sugerencias, { as: "sugerencia", foreignKey: "empleado_id_fk"});
   tareas.belongsTo(empleados, { as: "empleado_id_fk_empleado", foreignKey: "empleado_id_fk"});
@@ -43,7 +39,6 @@ function initModels(sequelize) {
     nominas,
     noticias,
     permisos,
-    sugerencia,
     sugerencias,
     tareas,
     usuarios,
