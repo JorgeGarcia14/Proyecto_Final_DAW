@@ -43,9 +43,9 @@ function Horario() {
     )
   }
 
-  if (!horario || !horario[0] || !datosEmple || !datosEmple[0]) {
+  /*if (!horario || !datosEmple) {
     return <div className="spinner"></div>;
-  }
+  }*/
 
   return (
     <div className="w-full h-full overflow-auto">
