@@ -7,6 +7,7 @@ import Horario from "./components/funcionalidades/horario";
 import Login from "./components/utils/login";
 import Caja from "./components/utils/caja";
 import Sugerencias from "./components/funcionalidades/sugerencias";
+import Nominas from "./components/funcionalidades/nominas";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Maneja el inicio de sesion
@@ -46,6 +47,7 @@ function App() {
             {visible === "contactos" && <Contactos />}
             {visible === "horarios" && <Horario />}
             {visible === "sugerencias" && <Sugerencias />}
+            {visible === "nominas" && <Nominas />}
             {/* Agrega aquí los demás componentes */}
           </Caja>
         </>
