@@ -7,7 +7,8 @@ const employeeRoutes = require('./routes/employeeRoutes');
 const usuariosRoutes = require('./routes/usuariosRoutes');
 const horarioRoutes = require('./routes/horarioRoutes');
 const sugerenciasRoutes = require('./routes/sugerenciasRoutes');
-const nominasRoutes = require('./routes/nominasRoutes');
+const nominaRoutes = require('./routes/nominaRoutes');
+
 const db = require('./db');
 
 const app = express();
@@ -19,7 +20,8 @@ app.use('/api/empleado', employeeRoutes);
 app.use('/api/usuario', usuariosRoutes);
 app.use('/api/horario', horarioRoutes);
 app.use('/api/sugerencias', sugerenciasRoutes);
-app.use('/api/nominas', nominasRoutes)
+app.use('/api/nomina', nominaRoutes);
+
 
 
 const PORT = process.env.PORT || 5000;

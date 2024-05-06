@@ -9,7 +9,6 @@ import Caja from "./components/utils/caja";
 import Sugerencias from "./components/funcionalidades/sugerencias";
 import Nominas from "./components/funcionalidades/nominas";
 
-
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Maneja el inicio de sesion
 
