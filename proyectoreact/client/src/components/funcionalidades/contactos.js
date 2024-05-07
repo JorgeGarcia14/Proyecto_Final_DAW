@@ -27,7 +27,7 @@ function Contactos() {
         `http://localhost:5000/api/empleado/nombre/${search}`
       );
       const data = await response.json();
-
+      console.log(data);
       setResults(data);
     } else {
       setResults(empleados);

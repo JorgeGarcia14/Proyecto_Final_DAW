@@ -5,12 +5,14 @@ const sequelize = require('../db');
 
 const Empleados = defineEmpleados(sequelize, Sequelize.DataTypes);
 
+//Todos los empleados
 const getEmpleados = function(req, res) {
     Empleados.findAll()
       .then(empleados => res.json(empleados))
       .catch(err => res.status(500).json({ error: 'Error al obtener los empleados', details: err }));
 };
 
+//Empleado por Id
 const getEmpleado = function(req, res) {
     const empleado_id = req.params.empleado_id;
     Empleados.findOne({ where: { empleado_id: empleado_id } })
@@ -24,25 +26,36 @@ const getEmpleado = function(req, res) {
       .catch(err => res.status(500).json({ error: 'Error al obtener el empleado', details: err }));
 };
 
-const getEmpleadoByName = function(req, res) {
-  const nombreCompleto = req.params.nombreCompleto;
-  if (!nombreCompleto) {
-    return res.status(400).json({ error: 'El nombre completo es requerido' });
-  }
+//Empleado por nombre
+const getEmpleadoByName = (nombreCompleto, callback) => {
   const palabras = nombreCompleto.split(' ');
+  const condiciones = palabras.map((palabra, index) => `(nombre LIKE :palabra${index} OR apellido1 LIKE :palabra${index} OR apellido2 LIKE :palabra${index})`).join(' AND ');
+  const sql = `SELECT * FROM empleados WHERE ${condiciones}`;
 
-  let condiciones = [];
-  palabras.forEach(palabra => {
-    condiciones.push(
-      { nombre: { [Sequelize.Op.like]: `%${palabra}%` } },
-      { apellido1: { [Sequelize.Op.like]: `%${palabra}%` } },
-      { apellido2: { [Sequelize.Op.like]: `%${palabra}%` } }
-    );
-  });
+  const replacements = palabras.reduce((obj, palabra, index) => ({ ...obj, [`palabra${index}`]: `%${palabra}%` }), {});
 
-  Empleados.findAll({ where: { [Sequelize.Op.or]: condiciones } })
-    .then(empleados => res.json(empleados))
-    .catch(err => res.status(500).json({ error: 'Error al obtener los empleados', details: err }));
+  db.query(sql, { replacements: replacements, type: db.QueryTypes.SELECT })
+    .then(result => {
+      callback(null, result);
+    })
+    .catch(err => {
+      callback(err);
+    });
 };
 
-module.exports = { getEmpleados, getEmpleado, getEmpleadoByName };
+//Añadir empleado
+const addEmpleado = function(req, res) {
+  const { dni, nombre, apellido1, apellido2, puesto, rol, telefono, direccion, correo, contraseña, antiguedad } = req.body;
+
+  if (!dni || !nombre || !apellido1 || !apellido2 || !puesto || !rol || !telefono || !direccion || !correo || !contraseña || !antiguedad) {
+    return res.status(400).json({ error: 'Todos los campos son requeridos' });
+  }
+
+  Empleados.create({
+    dni, nombre, apellido1, apellido2, puesto, rol, telefono, direccion, correo, contraseña, antiguedad
+  })
+    .then(empleado => res.status(201).json(empleado))
+    .catch(err => res.status(500).json({ error: 'Error al crear el empleado', details: err }));
+};
+
+module.exports = { getEmpleados, getEmpleado, getEmpleadoByName, addEmpleado };

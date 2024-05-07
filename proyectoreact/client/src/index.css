@@ -22,12 +22,22 @@ body {
   font-weight: bolder;
 }
 
+.titulo-admin{
+  font-size: 2em;
+  color:rgb(112, 66, 147);
+  font-family: "Mochiy Pop P One", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: bolder;
+}
+
 /*INICIO DE SESION*/
 
 .caja-login {
   height: calc(100vh - 60px - 36px);
   background-color: #8399A1;
 }
+
+/*TEXTOS*/
 
 .titulo-textos{
   font-size: 2em;
@@ -36,10 +46,23 @@ body {
   font-optical-sizing: auto;
 }
 
-/*TEXTOS*/
+.titulo-textos-admin{
+  font-size: 2em;
+  color:rgb(112, 66, 147);;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-optical-sizing: auto;
+}
+
 .textos-importantes{
   font-size: 1em;
   color:rgb(61, 88, 139);
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-optical-sizing: auto;
+}
+
+.textos-importantes-admin{
+  font-size: 1em;
+  color:rgb(112, 66, 147);
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-optical-sizing: auto;
 }
@@ -54,9 +77,6 @@ body {
 }
 
 /*MENU*/
-.caja-principal{
-  background-color: #8399A1;
-}
 
 .caja-menu {
   color: white;
@@ -74,6 +94,14 @@ body {
 
 .boton-header:hover{
   background-color: #607077;
+}
+
+.boton-header-admin{
+  background-color: rgb(112, 66, 147);
+}
+
+.boton-header-admin:hover{
+  background-color: rgb(80, 46, 107);
 }
 
 .boton-menu {

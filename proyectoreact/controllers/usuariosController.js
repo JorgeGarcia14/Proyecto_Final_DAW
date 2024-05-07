@@ -4,7 +4,7 @@ const { getUsuario: getUsuarioModel, getUsuarioId: getUsuarioIdModel, getUsuario
 
 const getUsuario = (req, res) => {
     const correo = req.params.correo;
-    getUsuarioModel(correo, (err, horario) => {
+    getUsuarioModel(correo, (err, usuario) => {
         if (err) {
             res.status(500).send(err);
         }
