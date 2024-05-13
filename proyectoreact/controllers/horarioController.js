@@ -1,6 +1,8 @@
-import { getHorario as getHorarioModel } from '../models/horario.js';
+// horarioController.js
 
-export const getHorario = (req, res) => {
+const { getHorario: getHorarioModel } = require('../models/modelosAntiguos/horario');
+
+const getHorario = (req, res) => {
     const EmpleadoID = req.params.EmpleadoID;
     getHorarioModel(EmpleadoID, (err, horario) => {
         if (err) {
@@ -10,3 +12,5 @@ export const getHorario = (req, res) => {
         }
     });
 };
+
+module.exports = { getHorario };

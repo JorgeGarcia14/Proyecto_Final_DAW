@@ -1,30 +1,29 @@
 // app.js
 
-import express from 'express';
-import { fileURLToPath } from 'url';
-import { dirname } from 'path';
-import path from 'path';
-import employeeRoutes from './routes/employeeRoutes.js';
-import usuariosRoutes from './routes/usuariosRoutes.js';
-import horarioRoutes from './routes/horarioRoutes.js';
-import cors from 'cors';
-import db from './db.js';
+const express = require('express');
+const path = require('path');
+const cors = require('cors');
+const employeeRoutes = require('./routes/employeeRoutes');
+const usuariosRoutes = require('./routes/usuariosRoutes');
+const horarioRoutes = require('./routes/horarioRoutes');
+const sugerenciasRoutes = require('./routes/sugerenciasRoutes');
+const nominaRoutes = require('./routes/nominaRoutes');
+
+const db = require('./db');
 
 const app = express();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
+app.use(express.json());
 app.use(express.static(path.join(__dirname, 'client/src')));
 
 app.use(cors());
 app.use('/api/empleado', employeeRoutes);
 app.use('/api/usuario', usuariosRoutes);
 app.use('/api/horario', horarioRoutes);
+app.use('/api/sugerencias', sugerenciasRoutes);
+app.use('/api/nomina', nominaRoutes);
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/public', 'index.html'));
-});
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
@@ -42,3 +41,5 @@ async function connectToDB() {
 }
 
 connectToDB();
+
+module.exports = app;

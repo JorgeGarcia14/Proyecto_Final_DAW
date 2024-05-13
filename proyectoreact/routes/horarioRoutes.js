@@ -1,10 +1,10 @@
-// routes/horarioRoutes.js
+// horarioRoutes.js
 
-import express from 'express';
-import { getHorario } from '../controllers/horarioController.js';
+const express = require('express');
+const { getHorario } = require('../controllers/horarioController');
 
 const router = express.Router();
 
 router.get('/:EmpleadoID', getHorario);
 
-export default router;
+module.exports = router;

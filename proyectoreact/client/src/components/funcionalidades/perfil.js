@@ -24,7 +24,7 @@ function Perfil() {
       }
   }, []);
 
-  if (!employee || !employee[0]) {
+  if (!employee) {
     return <div className="spinner"></div>;
   }
 
@@ -50,27 +50,27 @@ function Perfil() {
           <tbody>
             <tr>
               <td className="textos-importantes font-semibold p-2">Nombre:</td>
-              <td className="p-2">{employee[0].nombre}</td>
+              <td className="p-2">{`${employee.nombre} ${employee.apellido1} ${employee.apellido2}`}</td>
             </tr>
             <tr>
               <td className="textos-importantes font-semibold p-2">Puesto:</td>
-              <td className="p-2">{employee[0].puesto}</td>
+              <td className="p-2">{employee.puesto}</td>
             </tr>
             <tr>
               <td className="textos-importantes font-semibold p-2">Correo:</td>
-              <td className="p-2">{employee[0].correo}</td>
+              <td className="p-2">{employee.correo}</td>
             </tr>
             <tr>
               <td className="textos-importantes font-semibold p-2">
                 Teléfono:
               </td>
-              <td className="p-2">{employee[0].telefono}</td>
+              <td className="p-2">{employee.telefono}</td>
             </tr>
             <tr>
               <td className="textos-importantes font-semibold p-2">
                 Antigüedad:
               </td>
-              <td className="p-2">{employee[0].antiguedad}</td>
+              <td className="p-2">{employee.antiguedad}</td>
             </tr>
           </tbody>
         </table>

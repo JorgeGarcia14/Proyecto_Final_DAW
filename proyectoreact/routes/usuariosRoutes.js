@@ -1,12 +1,12 @@
-// routes/usuariosRoutes.js
+// usuariosRoutes.js
 
-import express from 'express';
-import {getUsuario, getUsuarioId, getUsuarioRol} from '../controllers/usuariosController.js';
+const express = require('express');
+const { getUsuario, getUsuarioId, getUsuarioRol } = require('../controllers/usuariosController');
 
 const router = express.Router();
 
-router.get('/:correo',getUsuario);
-router.get('/id/:correo',getUsuarioId);
-router.get('/rol/:correo',getUsuarioRol);
+router.get('/:correo', getUsuario);
+router.get('/id/:correo', getUsuarioId);
+router.get('/rol/:correo', getUsuarioRol);
 
-export default router;
+module.exports = router;

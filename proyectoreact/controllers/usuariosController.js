@@ -1,9 +1,10 @@
-//Usuarios Controller
-const Usuario = require('../models/usuario');
+// usuariosController.js
 
-exports.getUsuario = (req, res) => {
+const { getUsuario: getUsuarioModel, getUsuarioId: getUsuarioIdModel, getUsuarioRol: getUsuarioRolModel } = require('../models/modelosAntiguos/usuario');
+
+const getUsuario = (req, res) => {
     const correo = req.params.correo;
-    Usuario.getUsuario(correo, (err, horario) => {
+    getUsuarioModel(correo, (err, usuario) => {
         if (err) {
             res.status(500).send(err);
         }
@@ -13,7 +14,7 @@ exports.getUsuario = (req, res) => {
     });
 };
 
-export const getUsuarioId = (req, res) => {
+const getUsuarioId = (req, res) => {
     const correo = req.params.correo;
     getUsuarioIdModel(correo, (err, id) => {
         if (err) {
@@ -24,7 +25,7 @@ export const getUsuarioId = (req, res) => {
     });
 };
 
-export const getUsuarioRol = (req, res) => {
+const getUsuarioRol = (req, res) => {
     const correo = req.params.correo;
     getUsuarioRolModel(correo, (err, rol) => {
         if (err) {
@@ -35,3 +36,4 @@ export const getUsuarioRol = (req, res) => {
     });
 };
 
+module.exports = { getUsuario, getUsuarioId, getUsuarioRol };
