@@ -53,7 +53,7 @@ return (
             <p>Dirección: Calle 123, Ciudad, País, Código Postal</p>
         </div>
         <div className="employee-info">
-            <p><strong>Nombre del empleado:</strong> Juan Pérez</p>
+            <p><strong>Nombre del empleado:</strong> {empleado.nombre}</p>
             <p><strong>Cargo:</strong> Desarrollador de Software</p>
             <p><strong>Fecha de pago:</strong> 30 de abril de 2024</p>
         </div>
@@ -67,7 +67,7 @@ return (
                 <tr>
                     <td>Salario base</td>
                     <td>40 horas semanales</td>
-                    <td>2,500.00</td>
+                    <td>{nominas.total_neto}</td>
                 </tr>
                 <tr>
                     <td>Horas extras</td>
@@ -116,4 +116,3 @@ return (
 
 
 export default Nominas;
-
