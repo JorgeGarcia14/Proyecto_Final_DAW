@@ -7,7 +7,7 @@ const CrearEmpleado = () => {
   const [apellido1, setApellido1] = useState("");
   const [apellido2, setApellido2] = useState("");
   const [puesto, setPuesto] = useState("");
-  const [rol, setRol] = useState("");
+  const [rol, setRol] = useState("User");
   const [telefono, setTelefono] = useState("");
   const [direccion, setDireccion] = useState("");
   const [correo, setCorreo] = useState("");
@@ -113,9 +113,9 @@ const CrearEmpleado = () => {
           className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
         />
         <select
-          value={rol}
           onChange={(e) => setRol(e.target.value)}
           className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          defaultValue={rol}
         >
           <option value="Admin">Admin</option>
           <option value="User">User</option>

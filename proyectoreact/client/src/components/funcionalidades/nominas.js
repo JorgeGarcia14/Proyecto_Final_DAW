@@ -96,3 +96,4 @@ function Nominas() {
 }
 
 export default Nominas;
+

@@ -20,17 +20,17 @@ function initModels(sequelize) {
   var usuarios = _usuarios(sequelize, DataTypes);
   var vacaciones = _vacaciones(sequelize, DataTypes);
 
-  horarios.belongsTo(empleados, { as: "empleado_id_fk_empleado", foreignKey: "empleado_id_fk"});
+  horarios.belongsTo(empleados, { as: "empleado_id_fk_empleado", foreignKey: "empleado_id_fk", onDelete: 'CASCADE' });
   empleados.hasMany(horarios, { as: "horarios", foreignKey: "empleado_id_fk"});
-  nominas.belongsTo(empleados, { as: "empleado_id_fk_empleado", foreignKey: "empleado_id_fk"});
+  nominas.belongsTo(empleados, { as: "empleado_id_fk_empleado", foreignKey: "empleado_id_fk", onDelete: 'CASCADE' });
   empleados.hasMany(nominas, { as: "nominas", foreignKey: "empleado_id_fk"});
-  sugerencias.belongsTo(empleados, { as: "empleado_id_fk_empleado", foreignKey: "empleado_id_fk"});
+  sugerencias.belongsTo(empleados, { as: "empleado_id_fk_empleado", foreignKey: "empleado_id_fk", onDelete: 'CASCADE' });
   empleados.hasMany(sugerencias, { as: "sugerencia", foreignKey: "empleado_id_fk"});
-  tareas.belongsTo(empleados, { as: "empleado_id_fk_empleado", foreignKey: "empleado_id_fk"});
+  tareas.belongsTo(empleados, { as: "empleado_id_fk_empleado", foreignKey: "empleado_id_fk", onDelete: 'CASCADE' });
   empleados.hasMany(tareas, { as: "tareas", foreignKey: "empleado_id_fk"});
-  usuarios.belongsTo(empleados, { as: "empleado_id_fk_empleado", foreignKey: "empleado_id_fk"});
+  usuarios.belongsTo(empleados, { as: "empleado_id_fk_empleado", foreignKey: "empleado_id_fk", onDelete: 'CASCADE' });
   empleados.hasMany(usuarios, { as: "usuarios", foreignKey: "empleado_id_fk"});
-  vacaciones.belongsTo(empleados, { as: "empleado_id_fk_empleado", foreignKey: "empleado_id_fk"});
+  vacaciones.belongsTo(empleados, { as: "empleado_id_fk_empleado", foreignKey: "empleado_id_fk", onDelete: 'CASCADE' });
   empleados.hasMany(vacaciones, { as: "vacaciones", foreignKey: "empleado_id_fk"});
 
   return {

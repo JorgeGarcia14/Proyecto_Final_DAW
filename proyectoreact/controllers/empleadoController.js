@@ -58,4 +58,14 @@ const addEmpleado = function(req, res) {
     .catch(err => res.status(500).json({ error: 'Error al crear el empleado', details: err }));
 };
 
-module.exports = { getEmpleados, getEmpleado, getEmpleadoByName, addEmpleado };
+const deleteEmpleado = function (req, res) {
+  const empleado_id = req.params.empleado_id;
+  Empleados.destroy({ where: { empleado_id: empleado_id } })
+    .then(() => res.status(204).end())
+    .catch(err => {
+      console.error(err); // Imprime el error completo en la consola
+      res.status(500).json({ error: 'Error al eliminar el empleado', details: err });
+    });
+}
+
+module.exports = { getEmpleados, getEmpleado, getEmpleadoByName, addEmpleado, deleteEmpleado };
