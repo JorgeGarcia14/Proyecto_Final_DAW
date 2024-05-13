@@ -13,6 +13,7 @@ import Nominas from "./components/funcionalidades/nominas";
 //Componentes Admin
 import MenuAdmin from "./components/utils/Administrador/menuAdmin";
 import CrearEmpleado from "./components/funcionalidades/Administrador/crearEmpleado";
+import EmpleadosAdmin from "./components/funcionalidades/Administrador/empleadosAdmin";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Maneja el inicio de sesion
@@ -65,6 +66,7 @@ function App() {
             
             {/* COMPONENTES DE ADMINISTRADOR */}
             {visible === "crearEmpleado" && <CrearEmpleado />}
+            {visible === "empleadosAdmin" && <EmpleadosAdmin />}
           </Caja>
         </>
       ) : (
