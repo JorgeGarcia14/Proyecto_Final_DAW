@@ -8,15 +8,15 @@ function Contactos() {
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
 
+  const fetchEmpleados = async () => {
+    const response = await fetch("http://localhost:5000/api/empleado");
+    const data = await response.json();
+
+    setEmpleados(data);
+    setResults(data);
+  };
+
   useEffect(() => {
-    const fetchEmpleados = async () => {
-      const response = await fetch("http://localhost:5000/api/empleado");
-      const data = await response.json();
-
-      setEmpleados(data);
-      setResults(data);
-    };
-
     fetchEmpleados();
   }, []);
 
@@ -50,11 +50,13 @@ function Contactos() {
     } catch (error) {
       console.error("Error al eliminar el empleado:", error);
       toast.error("Error al eliminar el empleado");
+    } finally {
+      fetchEmpleados();
     }
   };
 
   if (!empleados || !empleados[0]) {
-    return <div className="spinner"></div>;
+    return <div className="spinner-admin"></div>;
   }
 
   const displayedEmpleados = search ? results : empleados;
