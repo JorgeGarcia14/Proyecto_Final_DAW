@@ -1,65 +1,97 @@
-// client/src/components/perfil.js
-import React, { useEffect, useState} from "react"; //Con useState y useEffect se pueden manejar estados y efectos en componentes funcionales
-import axios from "axios"; //AXIOS permite hacer peticiones HTTP desde el cliente
-import FullCalendar from '@fullcalendar/react'
-import dayGridPlugin from '@fullcalendar/daygrid'
+import React, { useState } from "react";
+import FullCalendar from '@fullcalendar/react';
+import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import multiMonthPlugin from '@fullcalendar/multimonth'; // Asegúrate de que este plugin esté instalado
 
 function Horario() {
-  const [horario, setHorario] = useState(null);
-  const [datosEmple, setDatosEmple] = useState(null);
+  const [events, setEvents] = useState([]);
+  const [eventType, setEventType] = useState('evento'); // Tipo de evento por defecto
 
-  useEffect(() => {
-    const id = localStorage.getItem('usuarioId');
-  
-    const fetchData = async () => {
-      try {
-        const responseHorario = await axios.get(`http://localhost:5000/api/horario/${id}`);
-        console.log(responseHorario.data);
-        setHorario(responseHorario.data);
-  
-        const responseEmple = await fetch(`http://localhost:5000/api/empleado/${id}`); // Datos del empleado para ese horario
-        const datos = await responseEmple.json();
-        setDatosEmple(datos);
-        console.log(datos);
-      } catch (error) {
-        console.error("Error:", error);
+  const handleDateSelect = (selectInfo) => {
+    let title = prompt('Ingrese el título del evento:');
+    let calendarApi = selectInfo.view.calendar;
+
+    calendarApi.unselect(); // clear date selection
+
+    if (title) {
+      let classNames;
+      switch (eventType) {
+        case 'evento':
+          classNames = 'evento-event';
+          break;
+        case 'nota':
+          classNames = 'nota-event';
+          break;
+        case 'vacaciones':
+          classNames = 'vacaciones-event';
+          break;
+        default:
+          classNames = ''; // Default class, if any
       }
-    };
-  
-    fetchData();
-  }, []);
 
-  const events = [
-    { title: 'Meeting', start: new Date() }
-  ]
-  
+      setEvents([...events, {
+        id: String(events.length + 1),
+        title,
+        start: selectInfo.startStr,
+        end: selectInfo.endStr,
+        resourceId: selectInfo.resource ? selectInfo.resource.id : null,
+        classNames: [classNames]
+      }]);
+    }
+  };
 
-  function renderEventContent(eventInfo) {
-    return (
-      <>
-        <b>{eventInfo.timeText}</b>
-        <i>{eventInfo.event.title}</i>
-      </>
-    )
-  }
-
-  /*if (!horario || !datosEmple) {
-    return <div className="spinner"></div>;
-  }*/
+  const handleEventTypeChange = (event) => {
+    setEventType(event.target.value);
+  };
 
   return (
     <div className="w-full h-full overflow-auto">
       <div className="p-4 bg-white rounded shadow-md overflow-hidden">
+      <div className="select-container">
+      <select className="custom-select" value={eventType} onChange={handleEventTypeChange}>
+        <option value="evento">Evento</option>
+        <option value="nota">Nota</option>
+        <option value="vacaciones">Vacaciones</option>
+      </select>
+      <div className="select-icon">&#9660;</div>
+      </div>
+      <br></br>
+      <br></br>
         <FullCalendar
-          plugins={[dayGridPlugin]}
+          plugins={[resourceTimelinePlugin, dayGridPlugin, interactionPlugin, multiMonthPlugin]}
           initialView='dayGridMonth'
-          weekends={false}
+          selectable={true}
+          select={handleDateSelect}
+          headerToolbar={{
+            left: 'prev,next today',
+            center: 'title',
+            right: 'resourceTimelineWeek,dayGridMonth,multiMonthYear'
+          }}
+          buttonText={{
+            today: 'Hoy',
+            month: 'Mes',
+            week: 'Semana',
+            day: 'Día',
+            resourceTimelineWeek: 'Semana (Recursos)',
+            multiMonthYear: 'Año'
+          }}
+          views={{
+            multiMonthYear: {
+              type: 'multiMonth',
+              duration: { years: 1 },
+              buttonText: 'Año',
+              numberOfMonths: 12 // Configura el número de meses a mostrar
+            }
+          }}
+          resources={[
+            { id: 'a', title: 'Room A' },
+            { id: 'b', title: 'Room B' },
+            { id: 'c', title: 'Room C' }
+          ]}
           events={events}
-          eventContent={renderEventContent}
-          className="overflow-hidden"
-          height="auto"
-          selectable="true"   
-          locale="ES"
+          locale="es" // Cambia el idioma a español
         />
       </div>
     </div>

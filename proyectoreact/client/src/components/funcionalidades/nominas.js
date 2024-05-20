@@ -2,98 +2,205 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Document, Page, Text, View, StyleSheet, PDFViewer } from '@react-pdf/renderer';
 
-// Estilos para el PDF
+// Define los estilos para el PDF con colores
 const styles = StyleSheet.create({
   page: {
-    flexDirection: 'column',
-    padding: 20,
+    padding: 30,
+    fontSize: 12,
     fontFamily: 'Helvetica',
+  },
+  header: {
+    fontSize: 20,
+    textAlign: 'center',
+    color: '#0073e6',
+    marginBottom: 20,
   },
   section: {
     margin: 10,
     padding: 10,
-    flexGrow: 1,
-    border: '1px solid #000',
+    border: '1px solid #0073e6',
+    borderRadius: 5,
+    backgroundColor: '#f0f8ff',
   },
-  header: {
-    marginBottom: 20,
+  table: {
+    display: "table",
+    width: "auto",
+    marginTop: 20,
+    borderStyle: "solid",
+    borderColor: '#0073e6',
+    borderWidth: 1,
+    borderRadius: 5,
   },
-  title: {
-    fontSize: 24,
+  tableRow: {
+    flexDirection: "row",
+  },
+  tableColHeader: {
+    backgroundColor: '#0073e6',
+    color: '#ffffff',
+    padding: 5,
+  },
+  tableCol: {
+    width: "50%",
+    borderStyle: "solid",
+    borderWidth: 1,
+    borderColor: '#0073e6',
+    padding: 5,
+  },
+  tableCell: {
+    margin: "auto",
+    marginTop: 5,
+    fontSize: 10,
+  },
+  bold: {
     fontWeight: 'bold',
-    marginBottom: 10,
-  },
-  subtitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    marginBottom: 5,
   },
   text: {
-    fontSize: 12,
+    marginBottom: 5,
   },
 });
 
 function Nominas() {
   const [nominas, setNominas] = useState([]);
-  const [empleado, setEmpleado] = useState([]);
+  const [empleado, setEmpleado] = useState({});
+  const [selectedMonth, setSelectedMonth] = useState(null);
   const id = localStorage.getItem('usuarioId');
   
   useEffect(() => {
-    try {
-      axios
-        .get(`http://localhost:5000/api/nomina/id/${id}`)
-        .then((response) => {
-          console.log(response.data);
-          setNominas(response.data);
-        });
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    axios
+      .get(`http://localhost:5000/api/nomina/id/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        setNominas(response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   }, []);
  
   useEffect(() => {
-    try {
-      axios
-        .get(`http://localhost:5000/api/empleado/${id}`)
-        .then((response) => {
-          console.log(response.data);
-          setEmpleado(response.data);
-        });
-    } catch (error) {
-      console.error("Error:", error);
-    }
+    axios
+      .get(`http://localhost:5000/api/empleado/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        setEmpleado(response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   }, []);
 
-  // Función para renderizar el PDF en el navegador
-  const renderPDF = () => (
-    <Document>
-      <Page size="A4" style={styles.page}>
-        <View style={styles.header}>
-          <Text style={styles.title}>Nómina Mensual</Text>
-          <Text style={styles.subtitle}>Empleado:</Text>
-          <Text style={styles.text}>{empleado.nombre}</Text>
-          <Text style={styles.subtitle}>Detalles:</Text>
-        </View>
-        {nominas.map((nomina, index) => (
-          <View key={index} style={styles.section}>
-            <Text style={styles.subtitle}>Fecha: {nomina.fecha}</Text>
-            <Text style={styles.text}>Horas trabajadas: {nomina.horas}</Text>
-            <Text style={styles.text}>Sueldo: {nomina.sueldo}</Text>
+  const handleMonthClick = (month) => {
+    if (selectedMonth === month) {
+      setSelectedMonth(null); // Cierra el PDF si se hace clic en el mismo mes
+    } else {
+      setSelectedMonth(month); // Abre el PDF si se hace clic en un mes diferente
+    }
+  };
+
+  const renderPDF = () => {
+    const nomina = nominas.find(n => n.mes === selectedMonth);
+    if (!nomina) return null;
+
+    return (
+      <Document>
+        <Page style={styles.page}>
+          <Text style={styles.header}>Nómina de {empleado.nombre} {empleado.apellido1} {empleado.apellido2}</Text>
+          <View style={styles.section}>
+            <Text style={[styles.bold, styles.text]}>Información del Empleado:</Text>
+            <Text style={styles.text}>DNI: {empleado.dni}</Text>
+            <Text style={styles.text}>Nombre: {empleado.nombre} {empleado.apellido1} {empleado.apellido2}</Text>
+            <Text style={styles.text}>Puesto: {empleado.puesto}</Text>
+            <Text style={styles.text}>Teléfono: {empleado.telefono}</Text>
+            <Text style={styles.text}>Dirección: {empleado.direccion}</Text>
+            <Text style={styles.text}>Correo: {empleado.correo}</Text>
           </View>
-        ))}
-      </Page>
-    </Document>
-  );
+          <View style={styles.section}>
+            <Text style={[styles.bold, styles.text]}>Detalles de la Nómina - Mes: {nomina.mes}</Text>
+            <View style={styles.table}>
+              <View style={styles.tableRow}>
+                <View style={[styles.tableCol, styles.tableColHeader]}>
+                  <Text style={styles.tableCell}>Concepto</Text>
+                </View>
+                <View style={[styles.tableCol, styles.tableColHeader]}>
+                  <Text style={styles.tableCell}>Cantidad</Text>
+                </View>
+              </View>
+              <View style={styles.tableRow}>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}>Total Bruto</Text>
+                </View>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}>{nomina.total_bruto} €</Text>
+                </View>
+              </View>
+              <View style={styles.tableRow}>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}>Horas Extra</Text>
+                </View>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}>{nomina.horas_extra} €</Text>
+                </View>
+              </View>
+              <View style={styles.tableRow}>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}>Bonificaciones</Text>
+                </View>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}>{nomina.bonificaciones} €</Text>
+                </View>
+              </View>
+              <View style={styles.tableRow}>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}>Deducciones</Text>
+                </View>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}>{nomina.deducciones} €</Text>
+                </View>
+              </View>
+              <View style={styles.tableRow}>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}>Total Neto</Text>
+                </View>
+                <View style={styles.tableCol}>
+                  <Text style={styles.tableCell}>{nomina.total_neto} €</Text>
+                </View>
+              </View>
+            </View>
+          </View>
+        </Page>
+      </Document>
+    );
+  };
 
   return (
-    <>
-      {/* Visualizador de PDF en el navegador */}
-      <PDFViewer style={{ width: '100%', height: '100vh' }}>
-        {renderPDF()}
-      </PDFViewer>
-    </>
+    <div className="w-full h-full overflow-auto">
+      <div className="p-4 bg-white overflow-hidden">
+        <div>
+          <h2 className="titulo-textos text-center text-xl font-semibold"> Nóminas </h2>
+          <ul>
+            {nominas.map((nomina) => (
+              <li className="textos-importantes font-semibold p-2" key={nomina.id}>
+                <a href="#" onClick={() => handleMonthClick(nomina.mes)}>
+                  {nomina.mes}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+        {/* Visualizador de PDF en el navegador */}
+        {selectedMonth && (
+          <div>
+            <button onClick={() => setSelectedMonth(null)} style={{ marginBottom: '10px' }}>
+              Volver
+            </button>
+            <PDFViewer style={{ width: '100%', height: '100vh' }}>
+              {renderPDF()}
+            </PDFViewer>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 
 export default Nominas;
-

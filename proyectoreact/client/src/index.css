@@ -177,52 +177,129 @@ header {
 }
 
 /*ESTILO PARA NOMINAS*/
-.wrapper {
-  border: 2px solid #000;
-  padding: 20px;
-  max-width: 600px;
+/* Estilos para la página */
+.page {
+  padding: 30px;
+  font-size: 12px;
+  font-family: 'Helvetica', sans-serif;
+}
+
+/* Estilos para el encabezado */
+.header {
+  font-size: 20px;
   text-align: center;
-  margin: auto; /* Alineación horizontal al centro */
-  display: flex;
-  justify-content: center; /* Alineación vertical al centro */
-  align-items: center; /* Alineación vertical al centro */
+  color: #0073e6;
+  margin-bottom: 20px;
 }
 
-.header h1 {
-  margin: 0;
+/* Estilos para las secciones */
+.section {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #0073e6;
+  border-radius: 5px;
+  background-color: #f0f8ff;
 }
 
-.header p {
-  margin-top: 5px;
-}
-
-.employee-info p,
-.bank-info p {
-  margin: 5px 0;
-}
-
-.payroll-details {
+/* Estilos para tablas */
+.table {
+  display: table;
+  width: auto;
   margin-top: 20px;
+  border-style: solid;
+  border-color: #0073e6;
+  border-width: 1px;
+  border-radius: 5px;
 }
 
-.tabla-nomina {
-  width: 100%;
-  border-collapse: collapse;
+/* Estilos para filas de tabla */
+.tableRow {
+  display: table-row;
 }
 
-.tabla-nomina th td
- {
-  border: 1px solid #000;
-  padding: 8px;
-  text-align: left;
+/* Estilos para encabezados de columnas de tabla */
+.tableColHeader {
+  background-color: #0073e6;
+  color: #ffffff;
+  padding: 5px;
 }
 
-.tabla-nomina th {
-  background-color: #f2f2f2;
+/* Estilos para columnas de tabla */
+.tableCol {
+  width: 50%;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #0073e6;
+  padding: 5px;
 }
 
-.signature p {
-  margin: 5px 0;
+/* Estilos para celdas de tabla */
+.tableCell {
+  margin: auto;
+  margin-top: 5px;
+  font-size: 10px;
+}
+
+/* Estilos para texto en negrita */
+.bold {
+  font-weight: bold;
+}
+
+/* Estilos generales para texto */
+.text {
+  margin-bottom: 5px;
+}
+
+/* ESTILOS PARA EVENTOS CALENDARIO */
+.evento-event {
+  background-color: blue;
+  border-color: blue;
+}
+
+.nota-event {
+  background-color: green;
+  border-color: green;
+}
+
+.vacaciones-event {
+  background-color: red;
+  border-color: red;
+}
+
+/* Estilo base del select */
+.select-container {
+  position: relative;
+  display: inline-block;
+}
+
+.select-container select {
+  appearance: none; /* Elimina el estilo predeterminado del navegador */
+  padding: 8px 38px 8px 12px; /* Espaciado interior */
+  font-size: 16px; /* Tamaño de fuente */
+  border: 1px solid #ccc; /* Borde del select */
+  border-radius: 4px; /* Bordes redondeados */
+  background-color: #fff; /* Color de fondo */
+  cursor: pointer; /* Cambia el cursor al pasar sobre el select */
+}
+
+/* Icono para el select */
+.select-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none; /* Evita que el icono afecte el clic del select */
+}
+
+/* Estilo al pasar el cursor sobre el select */
+.select-container select:hover {
+  border-color: #999; /* Cambia el color del borde al pasar el cursor */
+}
+
+/* Estilo al enfocar el select */
+.select-container select:focus {
+  outline: none; /* Elimina el contorno al enfocar */
+  border-color: #666; /* Cambia el color del borde al enfocar */
 }
 
 /*ESTILO PARA ADMINISTRADOR DE EMPLEADOS*/
