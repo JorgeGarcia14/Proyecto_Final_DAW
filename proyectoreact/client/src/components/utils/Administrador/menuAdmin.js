@@ -7,7 +7,6 @@ const MenuAdmin = ({ visible, toggleVisibility }) => {
       <div className="caja-menu flex flex-col space-y-4">
         <button className="boton-menu btn btn-dark text-left" onClick={() => toggleVisibility('crearEmpleado')}>Añadir Empleado</button>
         <button className="boton-menu btn btn-dark text-left" onClick={() => toggleVisibility('empleadosAdmin')}>Administrar Empleados</button>
-        <button className="boton-menu btn btn-dark text-left" onClick={() => toggleVisibility('horariosAdmin')}>Administrar Calendario</button>
         <button className="boton-menu btn btn-dark text-left" onClick={() => toggleVisibility('nominasAdmin')}>Nóminas de Empleados</button>
         <button className="boton-menu btn btn-dark text-left" onClick={() => toggleVisibility('sugerenciasAdmin')}>Administrar Sugerencias</button>
         <button className="boton-menu btn btn-dark text-left" onClick={() => toggleVisibility('vacantesAdmin')}>Administrar Vacantes</button>
