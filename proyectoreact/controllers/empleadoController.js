@@ -1,9 +1,11 @@
 // empleadoController.js
 const Sequelize = require('sequelize');
 const defineEmpleados = require('../models/empleados');
+const defineUsuarios = require('../models/usuarios');
 const sequelize = require('../db');
 
 const Empleados = defineEmpleados(sequelize, Sequelize.DataTypes);
+const Usuarios = defineUsuarios(sequelize, Sequelize.DataTypes);
 
 //Todos los empleados
 const getEmpleados = function(req, res) {
@@ -43,7 +45,7 @@ const getEmpleadoByName = (nombreCompleto, callback) => {
     });
 };
 
-//Añadir empleado
+// Añadir empleado
 const addEmpleado = function(req, res) {
   const { dni, nombre, apellido1, apellido2, puesto, rol, telefono, direccion, correo, contraseña, antiguedad } = req.body;
 
@@ -54,7 +56,18 @@ const addEmpleado = function(req, res) {
   Empleados.create({
     dni, nombre, apellido1, apellido2, puesto, rol, telefono, direccion, correo, contraseña, antiguedad
   })
-    .then(empleado => res.status(201).json(empleado))
+    .then(empleado => {
+      Usuarios.create({
+        nombre_usuario: nombre,
+        contraseña,
+        correo,
+        fecha_registro: new Date(),
+        ultimo_acceso: new Date(),
+        empleado_id_fk: empleado.empleado_id // Asegúrate de que 'id' es la propiedad correcta
+      })
+        .then(usuario => res.status(201).json({ empleado, usuario }))
+        .catch(err => res.status(500).json({ error: 'Error al crear el usuario', details: err }));
+    })
     .catch(err => res.status(500).json({ error: 'Error al crear el empleado', details: err }));
 };
 

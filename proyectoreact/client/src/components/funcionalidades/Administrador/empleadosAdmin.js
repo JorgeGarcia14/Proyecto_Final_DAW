@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import Swal from 'sweetalert2';
 
 function Contactos() {
   const [empleados, setEmpleados] = useState([]);
@@ -36,22 +37,35 @@ function Contactos() {
   };
 
   const borrarEmpleado = async (empleadoId) => {
-    try {
-      const response = await fetch(
-        `http://localhost:5000/api/empleado/delete/${empleadoId}`,
-        { method: "DELETE" }
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+    const result = await Swal.fire({
+      title: '¿Estás seguro?',
+      text: "No podrás revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, bórralo!',
+      cancelButtonText: 'Cancelar'
+    });
+  
+    if (result.isConfirmed) {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/empleado/delete/${empleadoId}`,
+          { method: "DELETE" }
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        console.log("Usuario eliminado con éxito");
+        toast.success("Usuario eliminado con éxito");
+        setEmpleados(empleados.filter((empleado) => empleado.id !== empleadoId));
+      } catch (error) {
+        console.error("Error al eliminar el empleado:", error);
+        toast.error("Error al eliminar el empleado");
+      } finally {
+        fetchEmpleados();
       }
-      console.log("Usuario eliminado con éxito");
-      toast.success("Usuario eliminado con éxito");
-      setEmpleados(empleados.filter((empleado) => empleado.id !== empleadoId));
-    } catch (error) {
-      console.error("Error al eliminar el empleado:", error);
-      toast.error("Error al eliminar el empleado");
-    } finally {
-      fetchEmpleados();
     }
   };
 

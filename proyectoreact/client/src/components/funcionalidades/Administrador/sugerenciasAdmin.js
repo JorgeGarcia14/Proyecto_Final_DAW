@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 function SugerenciasAdmin() {
   const [sugerencias, setSugerencias] = useState([]);
@@ -35,15 +36,29 @@ function SugerenciasAdmin() {
 
   const borrarSugerencia = async (sugerenciaId) => {
     try {
-      const response = await fetch(
-        `http://localhost:5000/api/sugerencias/delete/${sugerenciaId}`,
-        { method: "DELETE" }
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      const result = await Swal.fire({
+        title: '¿Estás seguro?',
+        text: "No podrás revertir esto!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, bórralo!',
+        cancelButtonText: 'Cancelar'
+      });
+
+      if (result.isConfirmed) {
+        const response = await fetch(
+          `http://localhost:5000/api/sugerencias/delete/${sugerenciaId}`,
+          { method: "DELETE" }
+        );
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        toast.success("Sugerencia eliminada con éxito");
+        setSugerencias(sugerencias.filter((sugerencia) => sugerencia.sugerencia_id !== sugerenciaId));
       }
-      toast.success("Sugerencia eliminada con éxito");
-      setSugerencias(sugerencias.filter((sugerencia) => sugerencia.sugerencia_id !== sugerenciaId));
+
     } catch (error) {
       toast.error("Error al eliminar la sugerencia");
     } finally {
