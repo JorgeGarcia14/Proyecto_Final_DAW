@@ -17,6 +17,28 @@ const getSugerencias = (req, res) => {
     });
 };
 
+const addSugerencia = (req, res) => {
+  const empleado_id_fk = req.params.empleado_id;
+  const { nombre, descripcion } = req.body;
+
+  if (!empleado_id_fk || !nombre || !descripcion) {
+    return res.status(400).json({ error: 'Todos los campos son requeridos' });
+  }
+
+  Sugerencias.create({
+    empleado_id_fk,
+    nombre,
+    descripcion
+  })
+    .then(sugerencia => res.status(201).json(sugerencia))
+    .catch(err => {
+      console.error(err); // Imprime el error completo en la consola
+      res.status(500).json({ error: 'Error al crear la sugerencia', details: err });
+    });
+};
+
+
+
 const deleteSugerencia = function (req, res) {
   const sugerencia_id = req.params.sugerencia_id;
   Sugerencias.destroy({ where: { sugerencia_id: sugerencia_id } })
@@ -28,4 +50,4 @@ const deleteSugerencia = function (req, res) {
 }
 
 
-module.exports = { getSugerencias , deleteSugerencia};
+module.exports = { getSugerencias , deleteSugerencia, addSugerencia};

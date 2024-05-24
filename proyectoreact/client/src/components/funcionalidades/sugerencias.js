@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function Sugerencias() {
   const [sugerencias, setSugerencias] = useState([]);
@@ -9,13 +10,16 @@ function Sugerencias() {
   const [nombre, setNombre] = useState("");
   const [descripcion, setDescripcion] = useState("");
 
+  const usuarioId = localStorage.getItem("usuarioId");
+  const [refresh, setRefresh] = useState(false);
+
   //Cada vez que se monta el componente, se obtienen las sugerencias de la base de datos
   useEffect(() => {
     fetch("http://localhost:5000/api/sugerencias")
       .then((response) => response.json())
       .then((data) => setSugerencias(data))
       .catch((error) => console.error("Error:", error));
-  }, []); // Ejecuta solo una vez cuando el componente se monta
+  }, [refresh]); // Ejecuta solo una vez cuando el componente se monta
 
   //Cada vez que se actualiza el estado de sugerencias, se actualizan las sugerencias actuales y restantes
   useEffect(() => {
@@ -47,24 +51,28 @@ function Sugerencias() {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
+      const nuevaSugerencia = {
+        nombre: nombre,
+        descripcion: descripcion,
+        empleado_id_fk: usuarioId,
+      };
 
-    const nuevaSugerencia = {
-      nombre: nombre,
-      descripcion: descripcion,
-      empleado_id_fk: 1, // Aquí debes poner el id del empleado que está haciendo la sugerencia
+      axios
+        .post(
+          `http://localhost:5000/api/sugerencias/add/${usuarioId}`,
+          nuevaSugerencia
+        )
+        .then((response) => {
+          toast.success("Sugerencia publicada con éxito");
+          console.log(response);
+          setNombre("");
+          setDescripcion("");
+          setRefresh(!refresh);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     };
-
-    axios
-      .post("http://localhost:5000/api/sugerencias", nuevaSugerencia)
-      .then((response) => {
-        console.log(response);
-        setNombre("");
-        setDescripcion("");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  };
 
   return (
     <div className="sugerencias flex">
@@ -87,6 +95,7 @@ function Sugerencias() {
           <button
             type="submit"
             className="logout boton-header p-2 bg-slate-500 text-white rounded self-end font-bold"
+            onClick={handleFormSubmit}
           >
             Publicar
           </button>
