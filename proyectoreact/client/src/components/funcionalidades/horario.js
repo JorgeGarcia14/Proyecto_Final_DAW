@@ -10,7 +10,7 @@ function Horario() {
   const [eventType, setEventType] = useState('evento'); // Tipo de evento por defecto
 
   const handleDateSelect = (selectInfo) => {
-    let title = prompt('Ingrese el título del evento:');
+    let title = eventType === 'vacaciones' ? 'Vacaciones pedidas' : prompt('Ingrese el título del evento:');
     let calendarApi = selectInfo.view.calendar;
 
     calendarApi.unselect(); // clear date selection
@@ -42,6 +42,13 @@ function Horario() {
     }
   };
 
+  const handleEventClick = (clickInfo) => {
+    if (window.confirm(`¿Deseas eliminar el evento '${clickInfo.event.title}'?`)) {
+      clickInfo.event.remove();
+      setEvents(events.filter(event => event.id !== clickInfo.event.id));
+    }
+  };
+
   const handleEventTypeChange = (event) => {
     setEventType(event.target.value);
   };
@@ -49,21 +56,22 @@ function Horario() {
   return (
     <div className="w-full h-full overflow-auto">
       <div className="p-4 bg-white rounded shadow-md overflow-hidden">
-      <div className="select-container">
-      <select className="custom-select" value={eventType} onChange={handleEventTypeChange}>
-        <option value="evento">Evento</option>
-        <option value="nota">Nota</option>
-        <option value="vacaciones">Vacaciones</option>
-      </select>
-      <div className="select-icon">&#9660;</div>
-      </div>
-      <br></br>
-      <br></br>
+        <div className="select-container">
+          <select className="custom-select" value={eventType} onChange={handleEventTypeChange}>
+            <option value="evento">Evento</option>
+            <option value="nota">Nota</option>
+            <option value="vacaciones">Vacaciones</option>
+          </select>
+          <div className="select-icon">&#9660;</div>
+        </div>
+        <br></br>
+        <br></br>
         <FullCalendar
           plugins={[resourceTimelinePlugin, dayGridPlugin, interactionPlugin, multiMonthPlugin]}
           initialView='dayGridMonth'
           selectable={true}
           select={handleDateSelect}
+          eventClick={handleEventClick}
           headerToolbar={{
             left: 'prev,next today',
             center: 'title',
