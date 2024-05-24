@@ -15,26 +15,29 @@ const styles = StyleSheet.create({
     padding: 30,
     fontSize: 12,
     fontFamily: "Helvetica",
+    backgroundColor: "#f5f5f5",
   },
   header: {
-    fontSize: 20,
+    fontSize: 24,
     textAlign: "center",
-    color: "#0073e6",
+    color: "#4a90e2",
     marginBottom: 20,
+    borderBottom: "2px solid #4a90e2",
+    paddingBottom: 10,
   },
   section: {
     margin: 10,
     padding: 10,
-    border: "1px solid #0073e6",
+    border: "1px solid #4a90e2",
     borderRadius: 5,
-    backgroundColor: "#f0f8ff",
+    backgroundColor: "#ffffff",
   },
   table: {
     display: "table",
     width: "auto",
     marginTop: 20,
     borderStyle: "solid",
-    borderColor: "#0073e6",
+    borderColor: "#4a90e2",
     borderWidth: 1,
     borderRadius: 5,
   },
@@ -42,21 +45,23 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   tableColHeader: {
-    backgroundColor: "#0073e6",
+    backgroundColor: "#4a90e2",
     color: "#ffffff",
     padding: 5,
+    textAlign: "center",
   },
   tableCol: {
     width: "50%",
     borderStyle: "solid",
     borderWidth: 1,
-    borderColor: "#0073e6",
+    borderColor: "#4a90e2",
     padding: 5,
   },
   tableCell: {
     margin: "auto",
     marginTop: 5,
     fontSize: 10,
+    textAlign: "center",
   },
   bold: {
     fontWeight: "bold",
@@ -226,14 +231,14 @@ function Nominas() {
         {/* Visualizador de PDF en el navegador */}
         {selectedMonth && (
           <div>
-            <button
+            <button className= "textos-importantes font-semibold p-2 text-center hover:border-blue-500 hover:border-2"
               onClick={() => {
                 setSelectedMonth(null);
                 setMostrarNominas(true);
               }}
               style={{ marginBottom: "10px" }}
             >
-              Volver
+              Cerrar
             </button>
             <PDFViewer style={{ width: "100%", height: "100vh" }}>
               {renderPDF()}

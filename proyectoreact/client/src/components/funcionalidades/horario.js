@@ -3,50 +3,85 @@ import FullCalendar from '@fullcalendar/react';
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
-import multiMonthPlugin from '@fullcalendar/multimonth'; // Asegúrate de que este plugin esté instalado
+import multiMonthPlugin from '@fullcalendar/multimonth';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+const MySwal = withReactContent(Swal);
 
 function Horario() {
   const [events, setEvents] = useState([]);
   const [eventType, setEventType] = useState('evento'); // Tipo de evento por defecto
 
   const handleDateSelect = (selectInfo) => {
-    let title = eventType === 'vacaciones' ? 'Vacaciones pedidas' : prompt('Ingrese el título del evento:');
-    let calendarApi = selectInfo.view.calendar;
+    const calendarApi = selectInfo.view.calendar;
 
     calendarApi.unselect(); // clear date selection
 
-    if (title) {
-      let classNames;
-      switch (eventType) {
-        case 'evento':
-          classNames = 'evento-event';
-          break;
-        case 'nota':
-          classNames = 'nota-event';
-          break;
-        case 'vacaciones':
-          classNames = 'vacaciones-event';
-          break;
-        default:
-          classNames = ''; // Default class, if any
-      }
-
+    if (eventType === 'vacaciones') {
       setEvents([...events, {
         id: String(events.length + 1),
-        title,
+        title: 'Vacaciones pedidas',
         start: selectInfo.startStr,
         end: selectInfo.endStr,
         resourceId: selectInfo.resource ? selectInfo.resource.id : null,
-        classNames: [classNames]
+        classNames: ['vacaciones-event']
       }]);
+    } else {
+      MySwal.fire({
+        title: 'Ingrese el título del evento:',
+        input: 'text',
+        showCancelButton: true,
+        inputValidator: (value) => {
+          if (!value) {
+            return '¡Necesitas escribir algo!';
+          }
+        }
+      }).then((result) => {
+        if (result.isConfirmed) {
+          let classNames;
+          switch (eventType) {
+            case 'evento':
+              classNames = 'evento-event';
+              break;
+            case 'nota':
+              classNames = 'nota-event';
+              break;
+            default:
+              classNames = ''; // Default class, if any
+          }
+
+          setEvents([...events, {
+            id: String(events.length + 1),
+            title: result.value,
+            start: selectInfo.startStr,
+            end: selectInfo.endStr,
+            resourceId: selectInfo.resource ? selectInfo.resource.id : null,
+            classNames: [classNames]
+          }]);
+        }
+      });
     }
   };
 
   const handleEventClick = (clickInfo) => {
-    if (window.confirm(`¿Deseas eliminar el evento '${clickInfo.event.title}'?`)) {
-      clickInfo.event.remove();
-      setEvents(events.filter(event => event.id !== clickInfo.event.id));
-    }
+    MySwal.fire({
+      title: `¿Deseas eliminar el evento '${clickInfo.event.title}'?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        clickInfo.event.remove();
+        setEvents(events.filter(event => event.id !== clickInfo.event.id));
+        MySwal.fire(
+          'Eliminado',
+          'El evento ha sido eliminado.',
+          'success'
+        );
+      }
+    });
   };
 
   const handleEventTypeChange = (event) => {
