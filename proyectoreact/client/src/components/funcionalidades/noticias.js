@@ -23,7 +23,7 @@ function Noticias() {
   return (
     <div>
       <h1 className="text-2xl mb-4 titulo-textos text-center">Descubre nuevas noticias</h1>
-      {noticiaActual && <iframe src={noticiaActual.noticia_url} width="100%" height="500px"></iframe>}
+      {noticiaActual && <iframe src={noticiaActual.noticia_url} title="Noticia Actual" width="100%" height="500px"></iframe>}
     </div>
   );
 }
