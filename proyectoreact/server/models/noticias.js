@@ -7,17 +7,13 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    titulo: {
-      type: DataTypes.STRING(100),
-      allowNull: true
+    noticia_url: {
+      type: DataTypes.STRING(255),
+      allowNull: false
     },
-    contenido: {
+    noticia_descripcion: {
       type: DataTypes.TEXT,
-      allowNull: true
-    },
-    fecha_publicacion: {
-      type: DataTypes.DATEONLY,
-      allowNull: true
+      allowNull: false
     }
   }, {
     sequelize,

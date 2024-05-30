@@ -1,6 +1,7 @@
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import React, { useState, useEffect } from "react";
+//Componentes
 import Header from "./components/utils/header";
 import Menu from "./components/utils/menu";
 import Perfil from "./components/funcionalidades/perfil";
@@ -10,11 +11,14 @@ import Login from "./components/utils/login";
 import Caja from "./components/utils/caja";
 import Sugerencias from "./components/funcionalidades/sugerencias";
 import Nominas from "./components/funcionalidades/nominas";
+import Noticias from './components/funcionalidades/noticias';
 //Componentes Admin
 import MenuAdmin from "./components/utils/Administrador/menuAdmin";
 import CrearEmpleado from "./components/funcionalidades/Administrador/crearEmpleado";
 import EmpleadosAdmin from "./components/funcionalidades/Administrador/empleadosAdmin";
 import SugerenciasAdmin from './components/funcionalidades/Administrador/sugerenciasAdmin';
+import NoticiasAdmin from './components/funcionalidades/Administrador/noticiasAdmin';
+import NominasAdmin from './components/funcionalidades/Administrador/nominasAdmin';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Maneja el inicio de sesion
@@ -64,11 +68,14 @@ function App() {
             {visible === "horarios" && <Horario />}
             {visible === "sugerencias" && <Sugerencias />}
             {visible === "nominas" && <Nominas />}
+            {visible === "noticias" && <Noticias />}
             
             {/* COMPONENTES DE ADMINISTRADOR */}
             {visible === "crearEmpleado" && <CrearEmpleado />}
             {visible === "empleadosAdmin" && <EmpleadosAdmin />}
             {visible === "sugerenciasAdmin" && <SugerenciasAdmin />}
+            {visible === "noticiasAdmin" && <NoticiasAdmin />}
+            {visible === "nominasAdmin" && <NominasAdmin />}
           </Caja>
         </>
       ) : (

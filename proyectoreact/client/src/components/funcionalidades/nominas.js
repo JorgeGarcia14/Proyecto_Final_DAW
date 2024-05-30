@@ -88,7 +88,7 @@ function Nominas() {
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     axios
@@ -100,7 +100,7 @@ function Nominas() {
       .catch((error) => {
         console.error("Error:", error);
       });
-  }, []);
+  }, [id]);
 
   const handleMonthClick = (month) => {
     if (selectedMonth === month) {
