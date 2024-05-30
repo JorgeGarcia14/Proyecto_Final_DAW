@@ -218,9 +218,9 @@ function Nominas() {
                   className="textos-importantes font-semibold p-2 text-center hover:border-blue-500 hover:border-2"
                   key={nomina.id}
                 >
-                  <a href="#" onClick={() => handleMonthClick(nomina.mes)}>
+                  <div onClick={() => handleMonthClick(nomina.mes)}>
                     {nomina.mes}
-                  </a>
+                  </div>
                 </li>
               ))
             ) : (

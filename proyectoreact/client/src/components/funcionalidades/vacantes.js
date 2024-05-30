@@ -76,13 +76,13 @@ function Vacantes() {
             <p className="p-2">
               <span className="font-semibold">Empresa:</span> {vacancy.company}
             </p>
-            <a
-              href="#"
+            <div
+              
               onClick={() => handleApply(vacancy)}
               className="text-blue-500 hover:underline p-2"
             >
               Aplicar a esta vacante
-            </a>
+            </div>
           </div>
         ))}
       </div>
