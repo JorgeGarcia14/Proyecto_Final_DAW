@@ -8,6 +8,7 @@ const usuariosRoutes = require('./routes/usuariosRoutes');
 const horarioRoutes = require('./routes/horarioRoutes');
 const sugerenciasRoutes = require('./routes/sugerenciasRoutes');
 const nominaRoutes = require('./routes/nominaRoutes');
+const noticiasRoutes = require('./routes/noticiasRoutes');
 
 const db = require('./db');
 
@@ -22,6 +23,7 @@ app.use('/api/usuario', usuariosRoutes);
 app.use('/api/horario', horarioRoutes);
 app.use('/api/sugerencias', sugerenciasRoutes);
 app.use('/api/nomina', nominaRoutes);
+app.use('/api/noticias', noticiasRoutes);
 
 
 
