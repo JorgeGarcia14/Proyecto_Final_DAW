@@ -10,7 +10,8 @@ import Login from "./components/utils/login";
 import Caja from "./components/utils/caja";
 import Sugerencias from "./components/funcionalidades/sugerencias";
 import Nominas from "./components/funcionalidades/nominas";
-//Componentes Admin
+import Vacantes from "./components/funcionalidades/vacantes";
+// Componentes Admin
 import MenuAdmin from "./components/utils/Administrador/menuAdmin";
 import CrearEmpleado from "./components/funcionalidades/Administrador/crearEmpleado";
 import EmpleadosAdmin from "./components/funcionalidades/Administrador/empleadosAdmin";
@@ -64,6 +65,7 @@ function App() {
             {visible === "horarios" && <Horario />}
             {visible === "sugerencias" && <Sugerencias />}
             {visible === "nominas" && <Nominas />}
+            {visible === "vacantes" && <Vacantes />}
             
             {/* COMPONENTES DE ADMINISTRADOR */}
             {visible === "crearEmpleado" && <CrearEmpleado />}
