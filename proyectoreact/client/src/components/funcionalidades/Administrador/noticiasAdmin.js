@@ -11,13 +11,13 @@ function NoticiasAdmin() {
   }, []);
 
   const fetchNoticias = async () => {
-    const response = await fetch("http://localhost:5000/api/noticias");
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/noticias`);
     const data = await response.json();
     setNoticias(data);
   };
 
   const deleteNoticia = async (id) => {
-    const response = await fetch(`http://localhost:5000/api/noticias/${id}`, {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/noticias/${id}`, {
       method: "DELETE",
     });
     if (response.ok) {
@@ -30,7 +30,7 @@ function NoticiasAdmin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/api/noticias", {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/noticias`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

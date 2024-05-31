@@ -15,7 +15,7 @@ function Sugerencias() {
 
   //Cada vez que se monta el componente, se obtienen las sugerencias de la base de datos
   useEffect(() => {
-    fetch("http://localhost:5000/api/sugerencias")
+    fetch(`${process.env.REACT_APP_API_URL}/sugerencias`)
       .then((response) => response.json())
       .then((data) => setSugerencias(data))
       .catch((error) => console.error("Error:", error));
@@ -59,7 +59,7 @@ function Sugerencias() {
 
       axios
         .post(
-          `http://localhost:5000/api/sugerencias/add/${usuarioId}`,
+          `${process.env.REACT_APP_API_URL}/sugerencias/add/${usuarioId}`,
           nuevaSugerencia
         )
         .then((response) => {

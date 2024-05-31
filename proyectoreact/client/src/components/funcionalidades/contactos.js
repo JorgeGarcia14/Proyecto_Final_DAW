@@ -9,13 +9,12 @@ function Contactos() {
 
   useEffect(() => {
     const fetchEmpleados = async () => {
-      const response = await fetch("http://localhost:5000/api/empleado");
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/empleado`);
       const data = await response.json();
 
       setEmpleados(data);
       setResults(data);
     };
-
     fetchEmpleados();
   }, []);
 
@@ -24,7 +23,7 @@ function Contactos() {
     console.log("Buscando...");
     if (search) {
       const response = await fetch(
-        `http://localhost:5000/api/empleado/nombre/${search}`
+        `${process.env.REACT_APP_API_URL}/empleado/nombre/${search}`
       );
       const data = await response.json();
       console.log(data);

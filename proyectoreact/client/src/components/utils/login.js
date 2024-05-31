@@ -9,7 +9,7 @@ function Login({ onLogin }) {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/usuario/${correo}`
+        `${process.env.REACT_APP_API_URL}/usuario/${correo}`
       );
   
       if (response.ok) {
@@ -18,8 +18,8 @@ function Login({ onLogin }) {
   
         if (data[0].contraseña === contraseña) {
           // Hacer una segunda solicitud para obtener el ID del usuario
-          const responseId = await fetch(`http://localhost:5000/api/usuario/id/${correo}`);
-          const responseRol = await fetch(`http://localhost:5000/api/usuario/rol/${correo}`);
+          const responseId = await fetch(`${process.env.REACT_APP_API_URL}/usuario/id/${correo}`);
+          const responseRol = await fetch(`${process.env.REACT_APP_API_URL}/usuario/rol/${correo}`);
           if (responseId.ok) {
             const dataId = await responseId.json();
             const dataRol = await responseRol.json();

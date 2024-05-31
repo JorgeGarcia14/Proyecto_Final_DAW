@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import Swal from 'sweetalert2';
 
 function Contactos() {
+  const images = ['foto.jpg', 'foto2.jpg', 'foto3.jpg', 'fotomujer1.jpg', 'fotomujer2.jpg']; 
   const [empleados, setEmpleados] = useState([]);
 
   //Estados para buscar empleado
@@ -10,7 +11,7 @@ function Contactos() {
   const [results, setResults] = useState([]);
 
   const fetchEmpleados = async () => {
-    const response = await fetch("http://localhost:5000/api/empleado");
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/empleado`);
     const data = await response.json();
 
     setEmpleados(data);
@@ -26,7 +27,7 @@ function Contactos() {
     console.log("Buscando...");
     if (search) {
       const response = await fetch(
-        `http://localhost:5000/api/empleado/nombre/${search}`
+        `${process.env.REACT_APP_API_URL}/empleado/nombre/${search}`
       );
       const data = await response.json();
       console.log(data);
@@ -51,7 +52,7 @@ function Contactos() {
     if (result.isConfirmed) {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/empleado/delete/${empleadoId}`,
+          `${process.env.REACT_APP_API_URL}/empleado/delete/${empleadoId}`,
           { method: "DELETE" }
         );
         if (!response.ok) {
@@ -96,7 +97,7 @@ function Contactos() {
               type="search"
               id="search"
               name="search"
-              placeholder="Buscar a un compañero/a"
+              placeholder="Buscar a un empleado/a"
               className="w-full px-3 py-2 border rounded-l-md"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -122,7 +123,7 @@ function Contactos() {
               >
                 <div className="flex items-center mr-6">
                   <img
-                    src="./images/foto.jpg"
+                    src={`./images/${images[Math.floor(Math.random() * images.length)]}`}
                     className="w-11 h-11 rounded-full"
                     alt="Eliminar"
                   />

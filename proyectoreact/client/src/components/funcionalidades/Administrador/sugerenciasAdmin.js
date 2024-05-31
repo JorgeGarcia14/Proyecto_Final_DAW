@@ -9,7 +9,7 @@ function SugerenciasAdmin() {
   const [search, setSearch] = useState("");
   //Cada vez que se monta el componente, se obtienen las sugerencias de la base de datos
   const fetchSugerencias = async () => {
-    const response = await fetch("http://localhost:5000/api/sugerencias");
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/sugerencias`);
     const data = await response.json();
     setSugerencias(data);
   };
@@ -27,7 +27,7 @@ function SugerenciasAdmin() {
     console.log("Buscando...");
     if (search) {
       const response = await fetch(
-        `http://localhost:5000/api/empleado/nombre/${search}` //Falta endpoint para buscar sugerencias por id o nombre
+        `${process.env.REACT_APP_API_URL}/empleado/nombre/${search}` //Falta endpoint para buscar sugerencias por id o nombre
       );
       const data = await response.json();
       console.log(data);
@@ -49,7 +49,7 @@ function SugerenciasAdmin() {
 
       if (result.isConfirmed) {
         const response = await fetch(
-          `http://localhost:5000/api/sugerencias/delete/${sugerenciaId}`,
+          `${process.env.REACT_APP_API_URL}/sugerencias/delete/${sugerenciaId}`,
           { method: "DELETE" }
         );
         if (!response.ok) {

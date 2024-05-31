@@ -38,7 +38,7 @@ const NominasAdmin = () => {
       total_neto,
     };
 
-    fetch("http://localhost:5000/api/nomina/  ", {
+    fetch(`${process.env.REACT_APP_API_URL}/nomina`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
