@@ -1,35 +1,32 @@
-// client/src/components/perfil.js
-
-import React, { useEffect, useState } from "react"; //Con useState y useEffect se pueden manejar estados y efectos en componentes funcionales
-import axios from "axios"; //AXIOS permite hacer peticiones HTTP desde el cliente
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 function Perfil() {
   const images = ['foto.jpg', 'foto2.jpg', 'foto3.jpg', 'fotomujer1.jpg', 'fotomujer2.jpg']; 
   const [employee, setEmployee] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(() => {
+    // Selecciona la imagen una sola vez cuando el componente se monta
+    let image = localStorage.getItem('selectedImage');
+    if (!image) {
+      image = images[Math.floor(Math.random() * images.length)];
+      localStorage.setItem('selectedImage', image);
+    }
+    return image;
+  });
 
   useEffect(() => {
     const id = localStorage.getItem('usuarioId');
-    let selectedImage = localStorage.getItem('selectedImage');
-
-    if (!selectedImage) {
-      selectedImage = images[Math.floor(Math.random() * images.length)];
-      localStorage.setItem('selectedImage', selectedImage);
-    }
-
-    try {
-      axios
-        .get(`${process.env.REACT_APP_API_URL}/empleado/${id}`)
-        .then((response) => {
-          console.log(response.data);
-          setEmployee(response.data);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  }, []);
+    
+    axios
+      .get(`${process.env.REACT_APP_API_URL}/empleado/${id}`)
+      .then((response) => {
+        console.log(response.data);
+        setEmployee(response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []); 
 
   if (!employee) {
     return <div className="spinner"></div>;
@@ -45,7 +42,7 @@ function Perfil() {
         </div>
         <div className="transform hover:scale-110 hover:-translate-x-2 transition-transform duration-500">
           <img
-            src={`./images/${localStorage.getItem('selectedImage')}`}
+            src={`./images/${selectedImage}`}
             alt="Foto de perfil"
             className="w-32 h-28 object-cover rounded-full"
           />
