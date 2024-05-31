@@ -8,6 +8,7 @@ var _sugerencias = require("./sugerencias");
 var _tareas = require("./tareas");
 var _usuarios = require("./usuarios");
 var _vacaciones = require("./vacaciones");
+var _vacantes = require("./vacantes");
 
 function initModels(sequelize) {
   var empleados = _empleados(sequelize, DataTypes);
@@ -19,6 +20,7 @@ function initModels(sequelize) {
   var tareas = _tareas(sequelize, DataTypes);
   var usuarios = _usuarios(sequelize, DataTypes);
   var vacaciones = _vacaciones(sequelize, DataTypes);
+  var vacantes = _vacantes(sequelize, DataTypes);
 
   horarios.belongsTo(empleados, { as: "empleado_id_fk_empleado", foreignKey: "empleado_id_fk"});
   empleados.hasMany(horarios, { as: "horarios", foreignKey: "empleado_id_fk"});
@@ -43,6 +45,7 @@ function initModels(sequelize) {
     tareas,
     usuarios,
     vacaciones,
+    vacantes,
   };
 }
 module.exports = initModels;

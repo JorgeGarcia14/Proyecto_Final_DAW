@@ -20,6 +20,7 @@ import EmpleadosAdmin from "./components/funcionalidades/Administrador/empleados
 import SugerenciasAdmin from './components/funcionalidades/Administrador/sugerenciasAdmin';
 import NoticiasAdmin from './components/funcionalidades/Administrador/noticiasAdmin';
 import NominasAdmin from './components/funcionalidades/Administrador/nominasAdmin';
+import VacantesAdmin from './components/funcionalidades/Administrador/vacantesAdmin';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // Maneja el inicio de sesion
@@ -78,6 +79,8 @@ function App() {
             {visible === "sugerenciasAdmin" && <SugerenciasAdmin />}
             {visible === "noticiasAdmin" && <NoticiasAdmin />}
             {visible === "nominasAdmin" && <NominasAdmin />}
+            {visible === "vacantesAdmin" && <VacantesAdmin />}
+
           </Caja>
         </>
       ) : (

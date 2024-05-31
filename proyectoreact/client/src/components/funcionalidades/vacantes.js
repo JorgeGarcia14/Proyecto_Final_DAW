@@ -1,49 +1,34 @@
-// client/src/components/funcionalidades/vacantes.js
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 
 function Vacantes() {
-  const [vacancies] = useState([
-    {
-      id: 1,
-      title: "Desarrollador Frontend",
-      description: "Desarrollador con experiencia en React y Tailwind CSS.",
-      location: "Ciudad de México",
-      salary: "50,000 MXN",
-      company: "Tech Solutions",
-    },
-    {
-      id: 2,
-      title: "Diseñador UX/UI",
-      description: "Diseñador con experiencia en Figma y Adobe XD.",
-      location: "Guadalajara",
-      salary: "45,000 MXN",
-      company: "Creative Minds",
-    },
-    {
-      id: 3,
-      title: "Analista de Datos",
-      description: "Analista con experiencia en SQL y Python.",
-      location: "Monterrey",
-      salary: "55,000 MXN",
-      company: "Data Insights",
-    },
-  ]);
 
-  const handleApply = (vacancy) => {
+  const [vacantes, setVacantes] = useState([]);
+  
+  useEffect(() => {
+    fetch('http://localhost:5000/api/vacantes')
+      .then(response => response.json())
+      .then(data => {
+        setVacantes(data);
+      });
+  }, []);
+
+  const [appliedVacancies, setAppliedVacancies] = useState([]);
+
+  const handleApply = (vacante) => {
     Swal.fire({
       title: '¿Quieres aplicar a esta vacante?',
-      text: `Aplicar a la posición de ${vacancy.title} en ${vacancy.company}.`,
+      text: `Aplicar a la posición de ${vacante.titulo} en ${vacante.empresa}.`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sí, aplicar',
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
+        setAppliedVacancies([...appliedVacancies, vacante.id]);
         Swal.fire(
           'Aplicado',
-          `Has aplicado con éxito a la vacante de ${vacancy.title}.`,
+          `Has aplicado con éxito a la vacante de ${vacante.titulo}.`,
           'success'
         );
       }
@@ -52,7 +37,7 @@ function Vacantes() {
 
   return (
     <div className="w-full h-full overflow-auto">
-      <div >
+      <div>
         <div className="w-full p-4">
           <h2 className="titulo-textos text-center text-xl font-semibold">
             Vacantes Disponibles
@@ -61,30 +46,39 @@ function Vacantes() {
       </div>
 
       <div className="flex flex-col justify-center mb-20 w-auto text-center hover:bg-gray-100 hover:bg-opacity-40 rounded-3xl transition-colors duration-500 shadow-md">
-        {vacancies.map((vacancy) => (
-          <div key={vacancy.id} className="m-8 p-4 border-b">
-            <h3 className="textos-importantes font-semibold p-2">
-              {vacancy.title}
-            </h3>
-            <p className="p-2">{vacancy.description}</p>
-            <p className="p-2">
-              <span className="font-semibold">Ubicación:</span> {vacancy.location}
-            </p>
-            <p className="p-2">
-              <span className="font-semibold">Salario:</span> {vacancy.salary}
-            </p>
-            <p className="p-2">
-              <span className="font-semibold">Empresa:</span> {vacancy.company}
-            </p>
-            <div
-              
-              onClick={() => handleApply(vacancy)}
-              className="text-blue-500 hover:underline p-2"
-            >
-              Aplicar a esta vacante
+        {vacantes.length > 0 ? (
+          vacantes.map((vacante) => (
+            <div key={vacante.id} className="m-8 p-4 border-b">
+              <h3 className="textos-importantes font-semibold p-2">
+                {vacante.titulo}
+              </h3>
+              <p className="p-2">{vacante.descripcion}</p>
+              <p className="p-2">
+                <span className="font-semibold">Ubicación:</span> {vacante.ubicacion}
+              </p>
+              <p className="p-2">
+                <span className="font-semibold">Salario:</span> {vacante.salario}
+              </p>
+              <p className="p-2">
+                <span className="font-semibold">Empresa:</span> {vacante.empresa}
+              </p>
+              {appliedVacancies.includes(vacante.id) ? (
+                <div className="text-green-500 p-2">Ya has aplicado a esta vacante</div>
+              ) : (
+                <div
+                  onClick={() => handleApply(vacante)}
+                  className="text-blue-500 hover:underline p-2 cursor-pointer"
+                >
+                  Aplicar a esta vacante
+                </div>
+              )}
             </div>
+          ))
+        ) : (
+          <div className="m-8 p-4 text-center text-gray-500">
+            No hay vacantes disponibles en este momento. Por favor, vuelve más tarde.
           </div>
-        ))}
+        )}
       </div>
     </div>
   );

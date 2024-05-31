@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
 });
 
 function Nominas() {
-  const [nominas, setNominas] = useState();
+  const [nominas, setNominas] = useState([]);
   const [empleado, setEmpleado] = useState({});
   const [selectedMonth, setSelectedMonth] = useState(null);
   const id = localStorage.getItem("usuarioId");
@@ -205,33 +205,37 @@ function Nominas() {
 
   return (
     <div className="w-full h-full overflow-auto">
-      <div className="p-4 bg-white overflow-hidden">
+      <div className="flex flex-col justify-center mb-20 w-auto text-center hover:bg-gray-100 hover:bg-opacity-40 rounded-3xl transition-colors duration-500 shadow-md">
         <div>
           <h2 className="titulo-textos text-center text-xl font-semibold">
-            {" "}
-            Consulta tus Nóminas{" "}
+            Consulta tus Nóminas
           </h2>
           <ul className=" mt-10">
             {mostrarNominas ? (
-              nominas.map((nomina) => (
-                <li
-                  className="textos-importantes font-semibold p-2 text-center hover:border-blue-500 hover:border-2"
-                  key={nomina.id}
-                >
-                  <div onClick={() => handleMonthClick(nomina.mes)}>
-                    {nomina.mes}
-                  </div>
-                </li>
-              ))
-            ) : (
-              <></>
-            )}
+              nominas.length > 0 ? (
+                nominas.map((nomina) => (
+                  <li
+                    className="textos-importantes font-semibold p-2 text-center hover:border-blue-500 hover:border-2 hover:cursor-pointer"  
+                    key={nomina.id}
+                  >
+                    <div onClick={() => handleMonthClick(nomina.mes)}>
+                      {nomina.mes}
+                    </div>
+                  </li>
+                ))
+              ) : (
+                <div className="m-8 p-4 text-center text-gray-500">
+                  No hay nóminas disponibles en este momento. Ya llega fin de mes, aguanta un poco más.
+                </div>
+              )
+            ) : null}
           </ul>
         </div>
         {/* Visualizador de PDF en el navegador */}
         {selectedMonth && (
           <div>
-            <button className= "textos-importantes font-semibold p-2 text-center hover:border-blue-500 hover:border-2"
+            <button
+              className="textos-importantes font-semibold p-2 text-center hover:border-blue-500 hover:border-2"
               onClick={() => {
                 setSelectedMonth(null);
                 setMostrarNominas(true);

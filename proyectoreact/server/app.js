@@ -1,5 +1,3 @@
-// app.js
-
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
@@ -9,6 +7,7 @@ const horarioRoutes = require('./routes/horarioRoutes');
 const sugerenciasRoutes = require('./routes/sugerenciasRoutes');
 const nominaRoutes = require('./routes/nominaRoutes');
 const noticiasRoutes = require('./routes/noticiasRoutes');
+const vacanteRoutes = require('./routes/vacanteRoutes');
 
 const db = require('./db');
 
@@ -24,8 +23,7 @@ app.use('/api/horario', horarioRoutes);
 app.use('/api/sugerencias', sugerenciasRoutes);
 app.use('/api/nomina', nominaRoutes);
 app.use('/api/noticias', noticiasRoutes);
-
-
+app.use('/api/vacantes', vacanteRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
