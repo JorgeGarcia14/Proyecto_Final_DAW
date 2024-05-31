@@ -50,7 +50,7 @@ const CrearEmpleado = () => {
       antiguedad,
     };
 
-    fetch("http://localhost:5000/api/empleado/add", {
+    fetch(`${process.env.REACT_APP_API_URL}/empleado/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

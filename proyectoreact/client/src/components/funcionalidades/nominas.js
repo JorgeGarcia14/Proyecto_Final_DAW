@@ -80,7 +80,7 @@ function Nominas() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/nomina/id/${id}`)
+      .get(`${process.env.REACT_APP_API_URL}/nomina/id/${id}`)
       .then((response) => {
         console.log(response.data);
         setNominas(response.data);
@@ -92,7 +92,7 @@ function Nominas() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/empleado/${id}`)
+      .get(`${process.env.REACT_APP_API_URL}/empleado/${id}`)
       .then((response) => {
         console.log(response.data);
         setEmpleado(response.data);

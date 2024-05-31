@@ -5,7 +5,7 @@ function Noticias() {
   const [noticiaActual, setNoticiaActual] = useState(null);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/noticias')
+    fetch(`${process.env.REACT_APP_API_URL}/noticias`)
       .then(response => response.json())
       .then(data => {
         setNoticias(data);

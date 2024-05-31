@@ -4,24 +4,31 @@ import React, { useEffect, useState } from "react"; //Con useState y useEffect s
 import axios from "axios"; //AXIOS permite hacer peticiones HTTP desde el cliente
 
 function Perfil() {
+  const images = ['foto.jpg', 'foto2.jpg', 'foto3.jpg', 'fotomujer1.jpg', 'fotomujer2.jpg']; 
   const [employee, setEmployee] = useState(null);
 
   useEffect(() => {
     const id = localStorage.getItem('usuarioId');
-    try{
+    let selectedImage = localStorage.getItem('selectedImage');
+
+    if (!selectedImage) {
+      selectedImage = images[Math.floor(Math.random() * images.length)];
+      localStorage.setItem('selectedImage', selectedImage);
+    }
+
+    try {
       axios
-      .get(`http://localhost:5000/api/empleado/${id}`)
-      .then((response) => {
-        console.log(response.data);
-        setEmployee(response.data);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      })
-      ;}
-      catch(error){
-        console.error("Error:", error);
-      }
+        .get(`${process.env.REACT_APP_API_URL}/empleado/${id}`)
+        .then((response) => {
+          console.log(response.data);
+          setEmployee(response.data);
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    } catch (error) {
+      console.error("Error:", error);
+    }
   }, []);
 
   if (!employee) {
@@ -38,7 +45,7 @@ function Perfil() {
         </div>
         <div className="transform hover:scale-110 hover:-translate-x-2 transition-transform duration-500">
           <img
-            src="./images/foto.jpg"
+            src={`./images/${localStorage.getItem('selectedImage')}`}
             alt="Foto de perfil"
             className="w-32 h-28 object-cover rounded-full"
           />
