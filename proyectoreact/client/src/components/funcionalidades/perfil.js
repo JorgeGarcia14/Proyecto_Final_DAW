@@ -4,7 +4,7 @@ import axios from "axios";
 function Perfil() {
   const images = ['foto.jpg', 'foto2.jpg', 'foto3.jpg', 'fotomujer1.jpg', 'fotomujer2.jpg']; 
   const [employee, setEmployee] = useState(null);
-  const [selectedImage, setSelectedImage] = useState(() => {
+  const [selectedImage] = useState(() => {
     // Selecciona la imagen una sola vez cuando el componente se monta
     let image = localStorage.getItem('selectedImage');
     if (!image) {
