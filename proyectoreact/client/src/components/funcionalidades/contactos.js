@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 function Contactos() {
   const [empleados, setEmpleados] = useState([]);
 
-  //Estados para buscar empleado
+  // Estados para buscar empleado
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
 
@@ -18,16 +18,25 @@ function Contactos() {
     fetchEmpleados();
   }, []);
 
+  // Función para normalizar las cadenas eliminando tildes y convirtiendo a minúsculas
+  const normalizeString = (str) => {
+    return str
+      .normalize("NFD") // Descompone los caracteres acentuados en caracteres base y marcas de acento
+      .replace(/[\u0300-\u036f]/g, "") // Elimina las marcas de acento
+      .toLowerCase(); // Convierte a minúsculas
+  };
+
   const handleSearch = async (event) => {
     event.preventDefault();
     console.log("Buscando...");
     if (search) {
-      const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/empleado/nombre/${search}`
+      const lowercasedSearch = normalizeString(search);
+      const filteredResults = empleados.filter((empleado) =>
+        normalizeString(
+          `${empleado.nombre} ${empleado.apellido1} ${empleado.apellido2}`
+        ).includes(lowercasedSearch)
       );
-      const data = await response.json();
-      console.log(data);
-      setResults(data);
+      setResults(filteredResults);
     } else {
       setResults(empleados);
     }
@@ -36,7 +45,6 @@ function Contactos() {
   if (!empleados || !empleados[0]) {
     return <div className="spinner"></div>;
   }
-
 
   const displayedEmpleados = search ? results : empleados;
 
