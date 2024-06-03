@@ -1,5 +1,6 @@
 var DataTypes = require("sequelize").DataTypes;
 var _empleados = require("./empleados");
+var _events = require("./events");
 var _horarios = require("./horarios");
 var _nominas = require("./nominas");
 var _noticias = require("./noticias");
@@ -12,6 +13,7 @@ var _vacantes = require("./vacantes");
 
 function initModels(sequelize) {
   var empleados = _empleados(sequelize, DataTypes);
+  var events = _events(sequelize, DataTypes);
   var horarios = _horarios(sequelize, DataTypes);
   var nominas = _nominas(sequelize, DataTypes);
   var noticias = _noticias(sequelize, DataTypes);
@@ -37,6 +39,7 @@ function initModels(sequelize) {
 
   return {
     empleados,
+    events,
     horarios,
     nominas,
     noticias,
