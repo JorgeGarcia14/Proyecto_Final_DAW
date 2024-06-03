@@ -15,7 +15,7 @@ function VacantesAdmin() {
   }, []);
 
   const fetchVacantes = async () => {
-    const response = await fetch("http://localhost:5000/api/vacantes");
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/vacantes`);
     const data = await response.json();
     setVacantes(data);
   };
@@ -35,7 +35,7 @@ function VacantesAdmin() {
     if (result.isConfirmed) {
       try {
         const response = await fetch(
-          `http://localhost:5000/api/vacantes/${id}`,
+          `${process.env.REACT_APP_API_URL}/vacantes/${id}`,
           { method: "DELETE" }
         );
         if (!response.ok) {
@@ -54,7 +54,7 @@ function VacantesAdmin() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/api/vacantes", {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}/vacantes`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
