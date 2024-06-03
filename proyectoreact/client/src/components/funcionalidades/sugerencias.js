@@ -64,7 +64,6 @@ function Sugerencias() {
         )
         .then((response) => {
           toast.success("Sugerencia publicada con éxito");
-          console.log(response);
           setNombre("");
           setDescripcion("");
           setRefresh(!refresh);

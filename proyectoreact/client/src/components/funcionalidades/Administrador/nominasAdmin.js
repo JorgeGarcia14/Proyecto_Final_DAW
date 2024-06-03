@@ -74,7 +74,7 @@ const NominasAdmin = () => {
           className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
         />
         <input
-          type="text"
+          type="date"
           value={mes}
           onChange={(e) => setMes(e.target.value)}
           placeholder="Mes"
