@@ -90,7 +90,7 @@ function SugerenciasAdmin() {
               type="search"
               id="search"
               name="search"
-              placeholder="Buscar a un compañero/a"
+              placeholder="Buscar una sugerencia"
               className="w-full px-3 py-2 border rounded-l-md"
               value={search}
               onChange={(e) => setSearch(e.target.value)}

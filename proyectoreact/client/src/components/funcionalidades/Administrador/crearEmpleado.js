@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const CrearEmpleado = () => {
   const [dni, setDni] = useState("");
@@ -13,6 +15,16 @@ const CrearEmpleado = () => {
   const [correo, setCorreo] = useState("");
   const [contraseña, setContraseña] = useState("");
   const [antiguedad, setAntiguedad] = useState("");
+
+  const validarTelefono = (telefono) => {
+    const telefonoRegex = /^\d{9}$/;
+    return telefonoRegex.test(telefono);
+  };
+
+  const validarFecha = (fecha) => {
+    const fechaRegex = /^\d{4}-\d{2}-\d{2}$/;
+    return fechaRegex.test(fecha);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -32,6 +44,18 @@ const CrearEmpleado = () => {
       !antiguedad
     ) {
       toast.error('Todos los campos son requeridos');
+      return;
+    }
+
+    // Validar el teléfono
+    if (!validarTelefono(telefono)) {
+      toast.error('El teléfono debe tener 9 dígitos');
+      return;
+    }
+
+    // Validar la fecha de antigüedad
+    if (!validarFecha(antiguedad)) {
+      toast.error('La fecha de antigüedad debe tener el formato yyyy-mm-dd');
       return;
     }
 
@@ -64,6 +88,7 @@ const CrearEmpleado = () => {
       })
       .catch((error) => {
         console.error("Error:", error);
+        toast.error('Error al crear el usuario');
         // Aquí puedes manejar lo que sucede si hay un error al crear el empleado
       });
   };
@@ -149,10 +174,10 @@ const CrearEmpleado = () => {
           className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
         />
         <input
-          type="text"
+          type="date"
           value={antiguedad}
           onChange={(e) => setAntiguedad(e.target.value)}
-          placeholder="Antigüedad"
+          placeholder="Antigüedad (yyyy-mm-dd)"
           className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
         />
         <button

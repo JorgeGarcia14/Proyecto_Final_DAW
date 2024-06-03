@@ -205,11 +205,11 @@ function Nominas() {
 
   return (
     <div className="w-full h-full overflow-auto">
-      <div className="flex flex-col justify-center mb-20 w-auto text-center hover:bg-gray-100 hover:bg-opacity-40 rounded-3xl transition-colors duration-500 shadow-md">
         <div>
-          <h2 className="titulo-textos text-center text-xl font-semibold">
+          <h2 className="titulo-textos text-center text-xl font-semibold mt-7">
             Consulta tus Nóminas
           </h2>
+          <div className="flex flex-col justify-center mb-20 w-auto text-center hover:bg-gray-100 hover:bg-opacity-40 rounded-3xl transition-colors duration-500 shadow-md mt-7">
           <ul className=" mt-10">
             {mostrarNominas ? (
               nominas.length > 0 ? (

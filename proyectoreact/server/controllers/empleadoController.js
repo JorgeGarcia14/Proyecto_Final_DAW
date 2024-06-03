@@ -2,10 +2,20 @@
 const Sequelize = require('sequelize');
 const defineEmpleados = require('../models/empleados');
 const defineUsuarios = require('../models/usuarios');
+const defineHorarios = require('../models/horarios');
+const defineNominas = require('../models/nominas');
+const defineSugerencias = require('../models/sugerencias');
+const defineTareas = require('../models/tareas');
+const defineVacaciones = require('../models/vacaciones');
 const sequelize = require('../db');
 
 const Empleados = defineEmpleados(sequelize, Sequelize.DataTypes);
 const Usuarios = defineUsuarios(sequelize, Sequelize.DataTypes);
+const Horarios = defineHorarios(sequelize, Sequelize.DataTypes);
+const Nominas = defineNominas(sequelize, Sequelize.DataTypes);
+const Sugerencias = defineSugerencias(sequelize, Sequelize.DataTypes);
+const Tareas = defineTareas(sequelize, Sequelize.DataTypes);
+const Vacaciones = defineVacaciones(sequelize, Sequelize.DataTypes);
 
 //Todos los empleados
 const getEmpleados = function(req, res) {
@@ -71,14 +81,27 @@ const addEmpleado = function(req, res) {
     .catch(err => res.status(500).json({ error: 'Error al crear el empleado', details: err }));
 };
 
-const deleteEmpleado = function (req, res) {
+const deleteEmpleado = async function(req, res) {
   const empleado_id = req.params.empleado_id;
-  Empleados.destroy({ where: { empleado_id: empleado_id } })
-    .then(() => res.status(204).end())
-    .catch(err => {
-      console.error(err); // Imprime el error completo en la consola
-      res.status(500).json({ error: 'Error al eliminar el empleado', details: err });
-    });
-}
+
+  try {
+    //Borramos todas las relaciones antes de borrar al empleado
+    await Usuarios.destroy({ where: { empleado_id_fk: empleado_id } });
+    await Horarios.destroy({ where: { empleado_id_fk: empleado_id } });
+    await Nominas.destroy({ where: { empleado_id_fk: empleado_id } });
+    await Sugerencias.destroy({ where: { empleado_id_fk: empleado_id } });
+    await Tareas.destroy({ where: { empleado_id_fk: empleado_id } });
+    await Vacaciones.destroy({ where: { empleado_id_fk: empleado_id } });
+
+    //Borramos al empleado
+    await Empleados.destroy({ where: { empleado_id: empleado_id } });
+
+    res.status(204).end();
+  } catch (err) {
+    console.error(err); // Imprime el error completo en la consola
+    res.status(500).json({ error: 'Error al eliminar el empleado y usuario asociado', details: err });
+  }
+};
+
 
 module.exports = { getEmpleados, getEmpleado, getEmpleadoByName, addEmpleado, deleteEmpleado };

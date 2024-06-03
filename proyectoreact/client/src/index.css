@@ -315,4 +315,24 @@ header {
   border-color: #666; /* Cambia el color del borde al enfocar */
 }
 
-/*ESTILO PARA ADMINISTRADOR DE EMPLEADOS*/
+/*ESTILO PARA SCROLLBAR*/
+/* Estilo genérico para todas las scrollbars */
+::-webkit-scrollbar {
+  width: 8px; /* Ancho de la scrollbar vertical */
+  height: 12px; /* Altura de la scrollbar horizontal */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Color del fondo de la track */
+  border-radius: 10px; /* Radio de borde para track */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* Color de la scrollbar */
+  border-radius: 10px; /* Radio de borde para scrollbar */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Color de la scrollbar cuando está en hover */
+}
+
