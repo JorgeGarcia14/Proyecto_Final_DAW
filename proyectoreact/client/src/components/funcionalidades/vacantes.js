@@ -6,7 +6,7 @@ function Vacantes() {
   const [vacantes, setVacantes] = useState([]);
   
   useEffect(() => {
-    fetch('http://localhost:5000/api/vacantes')
+    fetch(`${process.env.REACT_APP_API_URL}/vacantes`)
       .then(response => response.json())
       .then(data => {
         setVacantes(data);
