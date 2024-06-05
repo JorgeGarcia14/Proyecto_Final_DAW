@@ -2,8 +2,12 @@ import React from "react";
 
 export default function Header() {
 
-  const cerrarSesion = () => { //Al cerrar sesion borra el localstorage y recarga la pagina
-    localStorage.clear();
+  const cerrarSesion = () => {
+    const events = localStorage.getItem('events'); // Guarda los eventos
+    localStorage.clear(); // Borra todo en el LocalStorage
+    if (events) {
+      localStorage.setItem('events', events); // Restaura los eventos
+    }
     window.location.reload();
   };
 
