@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FullCalendar from '@fullcalendar/react';
 import resourceTimelinePlugin from '@fullcalendar/resource-timeline';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -13,77 +13,55 @@ function Horario() {
   const [events, setEvents] = useState([]);
   const [eventType, setEventType] = useState('evento'); // Tipo de evento por defecto
 
-  const handleDateSelect = (selectInfo) => {
-    const calendarApi = selectInfo.view.calendar;
+  // Cargar eventos desde LocalStorage al iniciar
+  useEffect(() => {
+    const localEvents = localStorage.getItem('events');
+    if (localEvents) {
+      setEvents(JSON.parse(localEvents));
+    }
+  }, []);
 
-    calendarApi.unselect(); // clear date selection
-
-    if (eventType === 'vacaciones') {
-      setEvents([...events, {
-        id: String(events.length + 1),
-        title: 'Vacaciones pedidas',
+  const handleDateSelect = async (selectInfo) => {
+    const { value: eventName } = await MySwal.fire({
+      title: 'Nombre del evento',
+      input: 'text',
+      inputPlaceholder: 'Introduce el nombre del evento'
+    });
+  
+    if (eventName) {
+      const newEvent = {
+        id: Math.random().toString(36).substr(2, 9),
+        title: eventName,
         start: selectInfo.startStr,
         end: selectInfo.endStr,
-        resourceId: selectInfo.resource ? selectInfo.resource.id : null,
-        classNames: ['vacaciones-event']
-      }]);
-    } else {
-      MySwal.fire({
-        title: 'Ingrese el título del evento:',
-        input: 'text',
-        showCancelButton: true,
-        inputValidator: (value) => {
-          if (!value) {
-            return '¡Necesitas escribir algo!';
-          }
-        }
-      }).then((result) => {
-        if (result.isConfirmed) {
-          let classNames;
-          switch (eventType) {
-            case 'evento':
-              classNames = 'evento-event';
-              break;
-            case 'nota':
-              classNames = 'nota-event';
-              break;
-            default:
-              classNames = ''; // Default class, if any
-          }
-
-          setEvents([...events, {
-            id: String(events.length + 1),
-            title: result.value,
-            start: selectInfo.startStr,
-            end: selectInfo.endStr,
-            resourceId: selectInfo.resource ? selectInfo.resource.id : null,
-            classNames: [classNames]
-          }]);
-        }
-      });
+        id_recurso: selectInfo.resource ? selectInfo.resource.id : null,
+        classnames: [eventType],
+        color: eventType === 'evento' ? '#258aef' : eventType === 'nota' ? '#6fd782' : '#d16969' // Agrega esta línea
+      };
+  
+      const newEvents = [...events, newEvent];
+      setEvents(newEvents);
+      localStorage.setItem('events', JSON.stringify(newEvents));
     }
   };
-
-  const handleEventClick = (clickInfo) => {
-    MySwal.fire({
-      title: `¿Deseas eliminar el evento '${clickInfo.event.title}'?`,
+  
+  const handleEventClick = async (clickInfo) => {
+    const result = await MySwal.fire({
+      title: '¿Estás seguro?',
+      text: "No podrás revertir esto!",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Sí, eliminar',
-      cancelButtonText: 'Cancelar'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        clickInfo.event.remove();
-        setEvents(events.filter(event => event.id !== clickInfo.event.id));
-        MySwal.fire(
-          'Eliminado',
-          'El evento ha sido eliminado.',
-          'success'
-        );
-      }
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, bórralo!'
     });
+  
+    if (result.isConfirmed) {
+      const newEvents = events.filter(event => event.id !== clickInfo.event.id); // Asegúrate de que estás accediendo al id del evento correctamente
+      setEvents(newEvents);
+      localStorage.setItem('events', JSON.stringify(newEvents));
+    }
   };
-
   const handleEventTypeChange = (event) => {
     setEventType(event.target.value);
   };
