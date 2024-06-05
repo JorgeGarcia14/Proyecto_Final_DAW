@@ -6,6 +6,6 @@ const {getNominasEmpleadoById, postNomina} = require('../controllers/nominaContr
 const router = express.Router();
 
 router.get('/id/:id', getNominasEmpleadoById);
-router.post('/', postNomina);
+router.post('/new', postNomina);
 
 module.exports = router;

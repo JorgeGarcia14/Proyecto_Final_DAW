@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { toast } from 'react-toastify';
 
 const NominasAdmin = () => {
-  const [empleado_id, setEmpleadoId] = useState("");
+  const [empleado_id, setEmpleadoId] = useState();
   const [mes, setMes] = useState("");
-  const [total_bruto, setTotalBruto] = useState("");
-  const [horas_extra, setHorasExtra] = useState("");
-  const [bonificaciones, setBonificaciones] = useState("");
-  const [deducciones, setDeducciones] = useState("");
-  const [total_neto, setTotalNeto] = useState("");
+  const [total_bruto, setTotalBruto] = useState();
+  const [horas_extra, setHorasExtra] = useState();
+  const [bonificaciones, setBonificaciones] = useState();
+  const [deducciones, setDeducciones] = useState();
+  const [total_neto, setTotalNeto] = useState();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -38,7 +38,7 @@ const NominasAdmin = () => {
       total_neto,
     };
 
-    fetch(`${process.env.REACT_APP_API_URL}/nomina`, {
+    fetch(`${process.env.REACT_APP_API_URL}/nomina/new`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -48,12 +48,10 @@ const NominasAdmin = () => {
       .then((response) => response.json())
       .then((data) => {
         toast.success('Nómina creada con éxito');
-        // Aquí puedes manejar lo que sucede después de que la nómina se crea exitosamente
       })
       .catch((error) => {
         console.error("Error:", error);
-        toast.error('Error al crear la nómina');
-        // Aquí puedes manejar lo que sucede si hay un error al crear la nómina
+        toast.error(`Error al crear la nómina: ${error.message}`);
       });
   };
 

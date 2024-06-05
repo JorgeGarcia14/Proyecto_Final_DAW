@@ -19,23 +19,24 @@ const getNominasEmpleadoById = function(req, res) {
 };
 
 const postNomina = function(req, res) {
-  const { empleado_id, mes, total_bruto, horas_extra, bonificaciones, deducciones, total_neto } = req.body;
+  const { nomina } = req.body;
 
-  if (!empleado_id || !mes || !total_bruto || !horas_extra || !bonificaciones || !deducciones || !total_neto) {
+  if (!nomina) {
+    return res.status(400).json({ error: 'La nómina es requerida' });
+  }
+
+  const { empleado_id_fk, mes, total_bruto, horas_extra, bonificaciones, deducciones, total_neto } = nomina;
+
+  if (!empleado_id_fk || !mes || !total_bruto || !horas_extra || !bonificaciones || !deducciones || !total_neto) {
     return res.status(400).json({ error: 'Todos los campos son requeridos' });
   }
 
-  Nominas.create({
-    empleado_id_fk: empleado_id,
-    mes,
-    total_bruto,
-    horas_extra,
-    bonificaciones,
-    deducciones,
-    total_neto
-  })
-    .then(nomina => res.status(201).json(nomina))
-    .catch(err => res.status(500).json({ error: 'Error al crear la nómina', details: err }));
+  Nominas.create(nomina)
+  .then(nomina => res.status(201).json(nomina))
+  .catch(err => {
+    console.error(err);
+    res.status(500).json({ error: 'Error al crear la nómina', details: err });
+  });
 };
 
 module.exports = { getNominasEmpleadoById, postNomina };
