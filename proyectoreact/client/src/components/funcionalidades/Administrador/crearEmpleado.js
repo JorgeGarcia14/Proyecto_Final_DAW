@@ -74,6 +74,8 @@ const CrearEmpleado = () => {
       antiguedad,
     };
 
+    console.log(JSON.stringify(empleado))
+
     fetch(`${process.env.REACT_APP_API_URL}/empleado/add`, {
       method: "POST",
       headers: {
@@ -94,100 +96,100 @@ const CrearEmpleado = () => {
   };
 
   return (
-    <div>
-      <h1 className="titulo-textos-admin text-center mb-8">
-        Añadir Nuevo Empleado
-      </h1>
-      <form
-        onSubmit={handleSubmit}
-        className="grid grid-cols-1 gap-4 sm:grid-cols-2"
-      >
-        <input
-          type="text"
-          value={dni}
-          onChange={(e) => setDni(e.target.value)}
-          placeholder="DNI"
-          className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-        />
-        <input
-          type="text"
-          value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
-          placeholder="Nombre"
-          className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-        />
-        <input
-          type="text"
-          value={apellido1}
-          onChange={(e) => setApellido1(e.target.value)}
-          placeholder="Primer apellido"
-          className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-        />
-        <input
-          type="text"
-          value={apellido2}
-          onChange={(e) => setApellido2(e.target.value)}
-          placeholder="Segundo apellido"
-          className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-        />
-        <input
-          type="text"
-          value={puesto}
-          onChange={(e) => setPuesto(e.target.value)}
-          placeholder="Puesto"
-          className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-        />
-        <select
-          onChange={(e) => setRol(e.target.value)}
-          className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-          defaultValue={rol}
-        >
-          <option value="Admin">Admin</option>
-          <option value="User">User</option>
-        </select>
-        <input
-          type="tel"
-          value={telefono}
-          onChange={(e) => setTelefono(e.target.value)}
-          placeholder="Teléfono"
-          className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-        />
-        <input
-          type="text"
-          value={direccion}
-          onChange={(e) => setDireccion(e.target.value)}
-          placeholder="Dirección"
-          className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-        />
-        <input
-          type="email"
-          value={correo}
-          onChange={(e) => setCorreo(e.target.value)}
-          placeholder="Correo"
-          className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-        />
-        <input
-          type="password"
-          value={contraseña}
-          onChange={(e) => setContraseña(e.target.value)}
-          placeholder="Contraseña"
-          className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-        />
-        <input
-          type="date"
-          value={antiguedad}
-          onChange={(e) => setAntiguedad(e.target.value)}
-          placeholder="Antigüedad (yyyy-mm-dd)"
-          className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-        />
-        <button
-          type="submit"
-          className="col-span-full px-3 py-2 text-white bg-purple-600 rounded-md hover:bg-purple-700 focus:outline-none"
-        >
-          Crear Empleado
-        </button>
-      </form>
-    </div>
+<div>
+  <h1 className="titulo-textos-admin text-center mb-8">
+    Añadir Nuevo Empleado
+  </h1>
+  <form
+    onSubmit={handleSubmit}
+    className="grid grid-cols-1 gap-4 sm:grid-cols-2"
+  >
+    <input
+      type="text"
+      value={dni}
+      onChange={(e) => setDni(e.target.value)}
+      placeholder="DNI"
+      className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+    />
+    <input
+      type="text"
+      value={nombre}
+      onChange={(e) => setNombre(e.target.value)}
+      placeholder="Nombre"
+      className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+    />
+    <input
+      type="text"
+      value={apellido1}
+      onChange={(e) => setApellido1(e.target.value)}
+      placeholder="Primer apellido"
+      className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+    />
+    <input
+      type="text"
+      value={apellido2}
+      onChange={(e) => setApellido2(e.target.value)}
+      placeholder="Segundo apellido"
+      className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+    />
+    <input
+      type="text"
+      value={puesto}
+      onChange={(e) => setPuesto(e.target.value)}
+      placeholder="Puesto"
+      className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+    />
+    <select
+      onChange={(e) => setRol(e.target.value)}
+      className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+      defaultValue={rol}
+    >
+      <option value="Admin">Admin</option>
+      <option value="User">User</option>
+    </select>
+    <input
+      type="tel"
+      value={telefono}
+      onChange={(e) => setTelefono(e.target.value)}
+      placeholder="Teléfono"
+      className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+    />
+    <input
+      type="text"
+      value={direccion}
+      onChange={(e) => setDireccion(e.target.value)}
+      placeholder="Dirección"
+      className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+    />
+    <input
+      type="email"
+      value={correo}
+      onChange={(e) => setCorreo(e.target.value)}
+      placeholder="Correo"
+      className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+    />
+    <input
+      type="password"
+      value={contraseña}
+      onChange={(e) => setContraseña(e.target.value)}
+      placeholder="Contraseña"
+      className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+    />
+    <input
+      type="date"
+      value={antiguedad}
+      onChange={(e) => setAntiguedad(e.target.value)}
+      placeholder="Antigüedad (yyyy-mm-dd)"
+      className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+    />
+    <button
+      type="submit"
+      className="col-span-full px-3 py-2 text-white bg-orange-400 rounded-md hover:bg-orange-500 focus:outline-none"
+    >
+      Crear Empleado
+    </button>
+  </form>
+</div>
   );
 };
 

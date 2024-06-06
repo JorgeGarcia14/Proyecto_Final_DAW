@@ -17,9 +17,12 @@ function NoticiasAdmin() {
   };
 
   const deleteNoticia = async (id) => {
-    const response = await fetch(`${process.env.REACT_APP_API_URL}/noticias/${id}`, {
-      method: "DELETE",
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_API_URL}/noticias/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
     if (response.ok) {
       fetchNoticias();
       toast.success("Noticia eliminada correctamente");
@@ -56,27 +59,23 @@ function NoticiasAdmin() {
         Publicar/Administrar Noticias
       </h1>
       <form className="flex flex-col" onSubmit={handleSubmit}>
-        <label className="mb-2 textos-importantes-admin">
-          Descripción:
-          <input
-            type="text"
-            value={descripcion}
-            onChange={(e) => setDescripcion(e.target.value)}
-            className="w-full px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-          />
-        </label>
-        <label className="mb-2 textos-importantes-admin">
-          URL:
-          <input
-            type="text"
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
-            className="w-full px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-          />
-        </label>
+        <label className="mb-2 textos-importantes-admin">Descripción:</label>
+        <input
+          type="text"
+          value={descripcion}
+          onChange={(e) => setDescripcion(e.target.value)}
+          className="w-full px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+        />
+        <label className="mb-2 textos-importantes-admin mt-2">URL:</label>
+        <input
+          type="text"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+          className="w-full px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+        />
         <button
           type="submit"
-          className="col-span-full px-3 py-2 text-white bg-purple-600 rounded-md hover:bg-purple-700 focus:outline-none"
+          className="col-span-full px-3 py-2 text-white bg-orange-400 rounded-md hover:bg-orange-500 focus:outline-none mt-4"
         >
           Añadir noticia
         </button>
@@ -101,7 +100,7 @@ function NoticiasAdmin() {
             >
               <img
                 src="./images/icons/remove.png"
-                className=""
+                className="botones-hover"
                 alt="Eliminar"
               />
             </button>

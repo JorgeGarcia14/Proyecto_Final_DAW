@@ -8,9 +8,12 @@ const sugerenciasRoutes = require('./routes/sugerenciasRoutes');
 const nominaRoutes = require('./routes/nominaRoutes');
 const noticiasRoutes = require('./routes/noticiasRoutes');
 const vacanteRoutes = require('./routes/vacanteRoutes');
-const eventsRoutes = require ('./routes/eventsRoutes')
-
+const eventsRoutes = require('./routes/eventsRoutes');
 const db = require('./db');
+
+// Importar Swagger
+const swaggerUi = require('swagger-ui-express');
+const swaggerJsdoc = require('swagger-jsdoc');
 
 const app = express();
 
@@ -18,6 +21,25 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'client/src')));
 
 app.use(cors());
+
+// Configurar las opciones de Swagger
+const options = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Mi API Express',
+      version: '1.0.0',
+    },
+  },
+  apis: ['./routes/*.js'], // path to the API docs
+};
+
+// Crear la documentación de Swagger
+const specs = swaggerJsdoc(options);
+
+// Usar Swagger como middleware
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+
 app.use('/api/empleado', employeeRoutes);
 app.use('/api/usuario', usuariosRoutes);
 app.use('/api/horario', horarioRoutes);
@@ -43,5 +65,3 @@ async function connectToDB() {
 }
 
 connectToDB();
-
-module.exports = app;
