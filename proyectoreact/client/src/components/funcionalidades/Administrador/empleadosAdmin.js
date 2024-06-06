@@ -77,7 +77,7 @@ function Contactos() {
   const displayedEmpleados = search ? results : empleados;
 
   return (
-    <div className="overflow-auto max-h-[500px]">
+    <div className='w-full h-full overflow-auto'>
       <div className="mt-8">
         <h1 className="titulo-textos-admin text-center mb-4">
           Administrar Empleados

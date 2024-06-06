@@ -81,45 +81,50 @@ function VacantesAdmin() {
   };
 
   return (
-    <div className="w-full overflow-auto max-h-[500px]">
+    <div className='w-full h-full overflow-auto'>
       <h1 className="titulo-textos-admin text-center mb-4">
         Publicar/Administrar Vacantes
       </h1>
-      <form className="flex flex-col" onSubmit={handleSubmit}>
-        <label className="mb-2 textos-importantes-admin">Titulo:</label>
+      <form className="grid grid-cols-1 gap-4 sm:grid-cols-2" onSubmit={handleSubmit}>
+
         <input
           type="text"
           value={titulo}
           onChange={(e) => setTitulo(e.target.value)}
-          className="w-full px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+          placeholder="Titulo"
+          className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
         />
-        <label className="mb-2 textos-importantes-admin">Descripción:</label>
+        
         <input
           type="text"
           value={descripcion}
           onChange={(e) => setDescripcion(e.target.value)}
-          className="w-full px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+          placeholder="Descripción"
+          className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
         />
-        <label className="mb-2 textos-importantes-admin">Ubicacion:</label>
+        
         <input
           type="text"
           value={ubicacion}
           onChange={(e) => setUbicacion(e.target.value)}
-          className="w-full px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+          placeholder="Ubicación"
+          className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
         />
-        <label className="mb-2 textos-importantes-admin">Salario:</label>
+        
         <input
           type="number"
           value={salario}
           onChange={(e) => setSalario(e.target.value)}
-          className="w-full px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+          placeholder="Salario"
+          className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
         />
-        <label className="mb-2 textos-importantes-admin">Empresa:</label>
+        
         <input
           type="text"
           value={empresa}
           onChange={(e) => setEmpresa(e.target.value)}
-          className="w-full px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+          placeholder="Empresa"
+          className="px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
         />
         <button
           type="submit"

@@ -21,13 +21,42 @@ function Horario() {
     }
   }, []);
 
+  const isDateRangeOverlapping = (start, end) => {
+    return events.some(event =>
+      event.classnames.includes('vacaciones') &&
+      ((start >= new Date(event.start) && start < new Date(event.end)) ||
+       (end > new Date(event.start) && end <= new Date(event.end)) ||
+       (start <= new Date(event.start) && end >= new Date(event.end)))
+    );
+  };
+
   const handleDateSelect = async (selectInfo) => {
-    const { value: eventName } = await MySwal.fire({
-      title: 'Nombre del evento',
-      input: 'text',
-      inputPlaceholder: 'Introduce el nombre del evento'
-    });
-  
+    let eventName;
+
+    if (eventType === 'vacaciones') {
+      const start = new Date(selectInfo.startStr);
+      const end = new Date(selectInfo.endStr);
+
+      if (isDateRangeOverlapping(start, end)) {
+        await MySwal.fire({
+          title: 'Conflicto de Vacaciones',
+          text: 'Ya existe un evento de vacaciones en el rango de fechas seleccionado.',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
+        return;
+      }
+
+      eventName = 'Vacaciones pedidas';
+    } else {
+      const { value } = await MySwal.fire({
+        title: 'Nombre del evento',
+        input: 'text',
+        inputPlaceholder: 'Introduce el nombre del evento'
+      });
+      eventName = value;
+    }
+
     if (eventName) {
       const newEvent = {
         id: Math.random().toString(36).substr(2, 9),
@@ -36,15 +65,15 @@ function Horario() {
         end: selectInfo.endStr,
         id_recurso: selectInfo.resource ? selectInfo.resource.id : null,
         classnames: [eventType],
-        color: eventType === 'evento' ? '#258aef' : eventType === 'nota' ? '#6fd782' : '#d16969' // Agrega esta línea
+        color: eventType === 'evento' ? '#258aef' : eventType === 'nota' ? '#6fd782' : '#d16969'
       };
-  
+
       const newEvents = [...events, newEvent];
       setEvents(newEvents);
       localStorage.setItem('events', JSON.stringify(newEvents));
     }
   };
-  
+
   const handleEventClick = async (clickInfo) => {
     const result = await MySwal.fire({
       title: '¿Estás seguro?',
@@ -55,13 +84,14 @@ function Horario() {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Sí, bórralo!'
     });
-  
+
     if (result.isConfirmed) {
       const newEvents = events.filter(event => event.id !== clickInfo.event.id); // Asegúrate de que estás accediendo al id del evento correctamente
       setEvents(newEvents);
       localStorage.setItem('events', JSON.stringify(newEvents));
     }
   };
+
   const handleEventTypeChange = (event) => {
     setEventType(event.target.value);
   };
@@ -88,7 +118,7 @@ function Horario() {
           headerToolbar={{
             left: 'prev,next today',
             center: 'title',
-            right: 'resourceTimelineWeek,dayGridMonth,multiMonthYear'
+            right: 'resourceTimelineWeek,dayGridMonth,multiMonthYear',
           }}
           buttonText={{
             today: 'Hoy',

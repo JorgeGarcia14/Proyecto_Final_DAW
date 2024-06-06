@@ -205,34 +205,31 @@ function Nominas() {
 
   return (
     <div className="w-full h-full overflow-auto">
-        <div>
-          <h2 className="titulo-textos text-center text-xl font-semibold mt-7">
-            Consulta tus Nóminas
-          </h2>
-          <div className="flex flex-col justify-center mb-20 w-auto text-center hover:bg-gray-100 hover:bg-opacity-40 rounded-3xl transition-colors duration-500 shadow-md mt-7">
-          <ul className=" mt-10">
-            {mostrarNominas ? (
-              nominas.length > 0 ? (
-                nominas.map((nomina) => (
-                  <li
-                    className="textos-importantes font-semibold p-2 text-center hover:border-blue-500 hover:border-2 hover:cursor-pointer"  
-                    key={nomina.id}
-                  >
-                    <div onClick={() => handleMonthClick(nomina.mes)}>
-                      {nomina.mes}
-                    </div>
-                  </li>
-                ))
-              ) : (
-                <div className="m-8 p-4 text-center text-gray-500">
-                  No hay nóminas disponibles en este momento. Ya llega fin de mes, aguanta un poco más.
-                </div>
-              )
-            ) : null}
+      <div>
+        <h2 className="titulo-textos text-center text-xl font-semibold mt-7">
+          Consulta tus Nóminas
+        </h2>
+
+        {mostrarNominas ? (
+          <ul className="flex flex-col justify-center mb-20 w-auto text-center hover:bg-gray-100 hover:bg-opacity-40 rounded-3xl transition-colors duration-500 shadow-md mt-7">
+            {nominas.length > 0 ? (
+              nominas.map((nomina) => (
+                <li
+                  className="textos-importantes font-semibold p-2 text-center hover:border-blue-500 hover:border-2 hover:cursor-pointer"
+                  key={nomina.id}
+                  onClick={() => handleMonthClick(nomina.mes)}
+                >
+                  {nomina.mes}
+                </li>
+              ))
+            ) : (
+              <div className="m-8 p-4 text-center text-gray-500">
+                No hay nóminas disponibles en este momento. Ya llega fin de mes,
+                aguanta un poco más.
+              </div>
+            )}
           </ul>
-        </div>
-        {/* Visualizador de PDF en el navegador */}
-        {selectedMonth && (
+        ) : (
           <div>
             <button
               className="textos-importantes font-semibold p-2 text-center hover:border-blue-500 hover:border-2"

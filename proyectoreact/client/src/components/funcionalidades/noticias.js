@@ -21,9 +21,9 @@ function Noticias() {
   }, [noticias]);
 
   return (
-    <div>
+    <div className='w-full h-full overflow-auto' >
       <h1 className="text-2xl mb-4 titulo-textos text-center">Descubre nuevas noticias</h1>
-      {noticiaActual && <iframe src={noticiaActual.noticia_url} title="Noticia Actual" width="100%" height="500px"></iframe>}
+      {noticiaActual && <iframe src={noticiaActual.noticia_url} title="Noticia Actual" className='w-full h-full overflow-auto'></iframe>}
     </div>
   );
 }
