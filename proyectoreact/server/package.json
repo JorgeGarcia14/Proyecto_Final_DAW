@@ -22,6 +22,8 @@
     "postcss": "^8.4.38",
     "sequelize": "^6.37.3",
     "sequelize-auto": "^0.8.8",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
   },
   "devDependencies": {

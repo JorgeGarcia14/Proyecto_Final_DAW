@@ -74,7 +74,7 @@ function SugerenciasAdmin() {
     <div className="overflow-auto max-h-[500px]">
       <div className="mt-8">
         <h1 className="titulo-textos-admin text-center mb-4">
-          Administrar Empleados
+          Administrar Sugerencias
         </h1>
       </div>
       <div className="flex items-center justify-center mb-7">
@@ -116,7 +116,7 @@ function SugerenciasAdmin() {
                   >
                     <img
                       src="./images/icons/remove.png"
-                      className=""
+                      className="botones-hover"
                       alt="Eliminar"
                       onClick={() => borrarSugerencia(sugerencia.sugerencia_id)}
                     />

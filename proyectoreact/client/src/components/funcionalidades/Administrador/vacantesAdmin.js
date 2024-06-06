@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 function VacantesAdmin() {
   const [descripcion, setDescripcion] = useState("");
@@ -22,16 +22,16 @@ function VacantesAdmin() {
 
   const borrarVacante = async (id) => {
     const result = await Swal.fire({
-      title: '¿Estás seguro?',
+      title: "¿Estás seguro?",
       text: "No podrás revertir esto!",
-      icon: 'warning',
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, bórrala!',
-      cancelButtonText: 'Cancelar'
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, bórrala!",
+      cancelButtonText: "Cancelar",
     });
-  
+
     if (result.isConfirmed) {
       try {
         const response = await fetch(
@@ -86,54 +86,44 @@ function VacantesAdmin() {
         Publicar/Administrar Vacantes
       </h1>
       <form className="flex flex-col" onSubmit={handleSubmit}>
-        <label className="mb-2 textos-importantes-admin">
-          Titulo:
-          <input
-            type="text"
-            value={titulo}
-            onChange={(e) => setTitulo(e.target.value)}
-            className="w-full px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-          />
-        </label>
-        <label className="mb-2 textos-importantes-admin">
-          Descripción:
-          <input
-            type="text"
-            value={descripcion}
-            onChange={(e) => setDescripcion(e.target.value)}
-            className="w-full px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-          />
-        </label>
-        <label className="mb-2 textos-importantes-admin">
-          Ubicacion:
-          <input
-            type="text"
-            value={ubicacion}
-            onChange={(e) => setUbicacion(e.target.value)}
-            className="w-full px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-          />
-        </label>
-        <label className="mb-2 textos-importantes-admin">
-          Salario:
-          <input
-            type="number"
-            value={salario}
-            onChange={(e) => setSalario(e.target.value)}
-            className="w-full px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-          />
-        </label>
-        <label className="mb-2 textos-importantes-admin">
-          Empresa:
-          <input
-            type="text"
-            value={empresa}
-            onChange={(e) => setEmpresa(e.target.value)}
-            className="w-full px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-          />
-        </label>
+        <label className="mb-2 textos-importantes-admin">Titulo:</label>
+        <input
+          type="text"
+          value={titulo}
+          onChange={(e) => setTitulo(e.target.value)}
+          className="w-full px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+        />
+        <label className="mb-2 textos-importantes-admin">Descripción:</label>
+        <input
+          type="text"
+          value={descripcion}
+          onChange={(e) => setDescripcion(e.target.value)}
+          className="w-full px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+        />
+        <label className="mb-2 textos-importantes-admin">Ubicacion:</label>
+        <input
+          type="text"
+          value={ubicacion}
+          onChange={(e) => setUbicacion(e.target.value)}
+          className="w-full px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+        />
+        <label className="mb-2 textos-importantes-admin">Salario:</label>
+        <input
+          type="number"
+          value={salario}
+          onChange={(e) => setSalario(e.target.value)}
+          className="w-full px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+        />
+        <label className="mb-2 textos-importantes-admin">Empresa:</label>
+        <input
+          type="text"
+          value={empresa}
+          onChange={(e) => setEmpresa(e.target.value)}
+          className="w-full px-3 py-2 placeholder-gray-500 border border-gray-300 rounded-md focus:outline-none focus:ring-orange-500 focus:border-orange-500"
+        />
         <button
           type="submit"
-          className="col-span-full px-3 py-2 text-white bg-purple-600 rounded-md hover:bg-purple-700 focus:outline-none"
+          className="col-span-full px-3 py-2 text-white bg-orange-400 rounded-md hover:bg-orange-500 focus:outline-none mt-4"
         >
           Añadir vacante
         </button>
@@ -145,9 +135,7 @@ function VacantesAdmin() {
             className="flex flex-row justify-between p-4 bg-white rounded shadow"
           >
             <div>
-              <h2 className="mb-2 text-lg font-semibold">
-                {vacante.titulo}
-              </h2>
+              <h2 className="mb-2 text-lg font-semibold">{vacante.titulo}</h2>
               <p className="mb-2 text-sm text-gray-600">
                 {vacante.descripcion}
               </p>
@@ -158,7 +146,7 @@ function VacantesAdmin() {
             >
               <img
                 src="./images/icons/remove.png"
-                className=""
+                className="botones-hover"
                 alt="Eliminar"
               />
             </button>

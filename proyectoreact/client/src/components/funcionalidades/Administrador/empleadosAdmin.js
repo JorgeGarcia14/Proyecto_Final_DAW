@@ -124,7 +124,7 @@ function Contactos() {
                 <div className="flex items-center mr-6">
                   <img
                     src={`./images/${images[Math.floor(Math.random() * images.length)]}`}
-                    className="w-11 h-11 rounded-full"
+                    className="botones-hover w-11 h-11 rounded-full"
                     alt="Eliminar"
                   />
                 </div>
@@ -144,7 +144,7 @@ function Contactos() {
                   <button className="w-6 h-6 flex items-center justify-center">
                     <img
                       src="./images/icons/edit.png"
-                      className=""
+                      className="botones-hover"
                       alt="Editar"
                     />
                   </button>
@@ -154,7 +154,7 @@ function Contactos() {
                   >
                     <img
                       src="./images/icons/remove.png"
-                      className=""
+                      className="botones-hover"
                       alt="Eliminar"
                     />
                   </button>

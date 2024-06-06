@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     mes: {
-      type: DataTypes.STRING(7),
+      type: DataTypes.STRING(15),
       allowNull: true
     },
     total_bruto: {

@@ -16,7 +16,7 @@ body {
 /*LOGO*/
 .titulo{
   font-size: 2em;
-  color:rgb(61, 88, 139);
+  color:#0b86c4;
   font-family: "Mochiy Pop P One", sans-serif;
   font-optical-sizing: auto;
   font-weight: bolder;
@@ -24,10 +24,18 @@ body {
 
 .titulo-admin{
   font-size: 2em;
-  color:rgb(112, 66, 147);
+  color:#d0821d;
   font-family: "Mochiy Pop P One", sans-serif;
   font-optical-sizing: auto;
   font-weight: bolder;
+}
+
+.caja-principal{
+  background-color: #0b86c4;
+}
+
+.caja-principal-admin{
+  background-color: #d0821d;
 }
 
 /*INICIO DE SESION*/
@@ -41,28 +49,28 @@ body {
 
 .titulo-textos{
   font-size: 2em;
-  color:rgb(61, 88, 139);
+  color:#0b86c4;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-optical-sizing: auto;
 }
 
 .titulo-textos-admin{
   font-size: 2em;
-  color:rgb(112, 66, 147);;
+  color:#d0821d;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-optical-sizing: auto;
 }
 
 .textos-importantes{
   font-size: 1em;
-  color:rgb(61, 88, 139);
+  color:rgb(11, 134, 196);
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-optical-sizing: auto;
 }
 
 .textos-importantes-admin{
   font-size: 1em;
-  color:rgb(112, 66, 147);
+  color:#d0821d;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-optical-sizing: auto;
 }
@@ -75,6 +83,11 @@ body {
 .boton-inicio {
   color: white;
 }
+
+.botones-hover:hover{
+  scale:1.2;
+}
+
 
 /*MENU*/
 
@@ -89,19 +102,19 @@ body {
 }
 
 .boton-header{
-  background-color: #768D97;
+  background-color: #55b6df;
 }
 
 .boton-header:hover{
-  background-color: #607077;
+  background-color: #2f7491;
 }
 
 .boton-header-admin{
-  background-color: rgb(112, 66, 147);
+  background-color: #d0821d;
 }
 
 .boton-header-admin:hover{
-  background-color: rgb(80, 46, 107);
+  background-color: #805114;
 }
 
 .boton-menu {
@@ -136,7 +149,7 @@ header {
 /*CIRCULO DE CARGANDO*/
 .spinner {
   border: 16px solid #f3f3f3;
-  border-top: 16px solid rgb(61, 88, 139);
+  border-top: 16px solid #55b6df;
   border-radius: 50%;
   width: 120px;
   height: 120px;
@@ -149,7 +162,7 @@ header {
 
 .spinner-admin{
   border: 16px solid #f3f3f3;
-  border-top: 16px solid rgb(112, 66, 147);
+  border-top: 16px solid #d0821d;
   border-radius: 50%;
   width: 120px;
   height: 120px;
@@ -261,22 +274,6 @@ header {
 /* Estilos generales para texto */
 .text {
   margin-bottom: 5px;
-}
-
-/* ESTILOS PARA EVENTOS CALENDARIO */
-.evento-event {
-  background-color: blue;
-  border-color: blue;
-}
-
-.nota-event {
-  background-color: green;
-  border-color: green;
-}
-
-.vacaciones-event {
-  background-color: red;
-  border-color: red;
 }
 
 /* Estilo base del select */
