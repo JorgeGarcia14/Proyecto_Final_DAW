@@ -4,12 +4,14 @@ import Swal from "sweetalert2";
 function Vacantes() {
 
   const [vacantes, setVacantes] = useState([]);
+  const [cargando, setCargando] = useState(true);
   
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/vacantes`)
       .then(response => response.json())
       .then(data => {
         setVacantes(data);
+        setCargando(false);
       });
   }, []);
 
@@ -35,6 +37,10 @@ function Vacantes() {
     });
   };
 
+  if (cargando) {
+    return <div className="spinner"></div>;
+  }
+
   return (
     <div className="w-full h-full overflow-auto">
       <div>
@@ -45,10 +51,10 @@ function Vacantes() {
         </div>
       </div>
 
-      <div className="flex flex-col justify-center mb-20 w-auto text-center hover:bg-gray-100 hover:bg-opacity-40 rounded-3xl transition-colors duration-500 shadow-md">
+      <div className="flex flex-col justify-center mb-20 w-auto text-center hover:bg-gray-100 hover:bg-opacity-40 rounded-3xl transition-colors duration-500 shadow-md mt-5">
         {vacantes.length > 0 ? (
           vacantes.map((vacante) => (
-            <div key={vacante.id} className="m-8 p-4 border-b">
+            <div key={vacante.id} className=" p-4 border-b">
               <h3 className="textos-importantes font-semibold p-2">
                 {vacante.titulo}
               </h3>
