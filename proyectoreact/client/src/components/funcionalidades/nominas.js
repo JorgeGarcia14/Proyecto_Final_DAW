@@ -77,6 +77,7 @@ function Nominas() {
   const [selectedMonth, setSelectedMonth] = useState(null);
   const id = localStorage.getItem("usuarioId");
   const [mostrarNominas, setMostrarNominas] = useState(true);
+  const[cargandoNominas, setCargandoNominas] = useState(true);
 
   useEffect(() => {
     axios
@@ -84,6 +85,7 @@ function Nominas() {
       .then((response) => {
         console.log(response.data);
         setNominas(response.data);
+        setCargandoNominas(false);  
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -199,7 +201,7 @@ function Nominas() {
     );
   };
 
-  if (!nominas) {
+  if (cargandoNominas) {
     return <div className="spinner"></div>;
   }
 
