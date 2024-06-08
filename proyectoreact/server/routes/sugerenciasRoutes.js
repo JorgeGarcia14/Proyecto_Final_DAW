@@ -8,7 +8,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /:
+ * sugerencias/:
  *   get:
  *     summary: Obtiene todas las sugerencias
  *     responses:
@@ -19,7 +19,7 @@ router.get('/', getSugerencias);
 
 /**
  * @swagger
- * /delete/{sugerencia_id}:
+ * sugerencias/delete/{sugerencia_id}:
  *   delete:
  *     summary: Elimina una sugerencia específica
  *     parameters:
@@ -37,7 +37,7 @@ router.delete('/delete/:sugerencia_id', deleteSugerencia);
 
 /**
  * @swagger
- * /add/{empleado_id}:
+ * sugerencias/add/{empleado_id}:
  *   post:
  *     summary: Añade una nueva sugerencia
  *     parameters:

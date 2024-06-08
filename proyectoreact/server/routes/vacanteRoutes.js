@@ -7,7 +7,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /{id}:
+ * vacantes/{id}:
  *   get:
  *     summary: Obtiene una vacante específica
  *     parameters:
@@ -25,7 +25,7 @@ router.get('/:id', getVacante);
 
 /**
  * @swagger
- * /:
+ * vacantes/:
  *   get:
  *     summary: Obtiene todas las vacantes
  *     responses:
@@ -36,7 +36,7 @@ router.get('/', getAllVacantes);
 
 /**
  * @swagger
- * /:
+ * vacantes/:
  *   post:
  *     summary: Crea una nueva vacante
  *     requestBody:
@@ -58,7 +58,7 @@ router.post('/', postVacante);
 
 /**
  * @swagger
- * /{id}:
+ * vacantes/{id}:
  *   delete:
  *     summary: Elimina una vacante específica
  *     parameters:

@@ -7,7 +7,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /id/{id}:
+ * nomina/id/{id}:
  *   get:
  *     summary: Obtiene las nóminas de un empleado específico
  *     parameters:
@@ -25,7 +25,7 @@ router.get('/id/:id', getNominasEmpleadoById);
 
 /**
  * @swagger
- * /new:
+ * nomina/new:
  *   post:
  *     summary: Crea una nueva nómina
  *     requestBody:
