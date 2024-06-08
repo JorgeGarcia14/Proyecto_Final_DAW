@@ -7,7 +7,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /horario/{EmpleadoID}:
+ * api/horario/{EmpleadoID}:
  *   get:
  *     summary: Obtiene el horario de un empleado específico
  *     parameters:

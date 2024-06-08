@@ -25,7 +25,7 @@ router.get('/:id', getNoticia);
 
 /**
  * @swagger
- * noticia/:
+ * api/noticia/:
  *   get:
  *     summary: Obtiene todas las noticias
  *     responses:
@@ -36,7 +36,7 @@ router.get('/', getAllNoticias);
 
 /**
  * @swagger
- * noticia/:
+ * api/noticia/:
  *   post:
  *     summary: Crea una nueva noticia
  *     requestBody:
@@ -58,7 +58,7 @@ router.post('/', postNoticia);
 
 /**
  * @swagger
- * noticia/{id}:
+ * api/noticia/{id}:
  *   delete:
  *     summary: Elimina una noticia específica
  *     parameters:
