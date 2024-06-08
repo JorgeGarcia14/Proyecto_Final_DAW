@@ -7,7 +7,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /{correo}:
+ * usuario/{correo}:
  *   get:
  *     summary: Obtiene un usuario específico por correo
  *     parameters:
@@ -25,7 +25,7 @@ router.get('/:correo', getUsuario);
 
 /**
  * @swagger
- * /id/{correo}:
+ * usuario/id/{correo}:
  *   get:
  *     summary: Obtiene el ID de un usuario específico por correo
  *     parameters:
@@ -43,7 +43,7 @@ router.get('/id/:correo', getUsuarioId);
 
 /**
  * @swagger
- * /rol/{correo}:
+ * usuario/rol/{correo}:
  *   get:
  *     summary: Obtiene el rol de un usuario específico por correo
  *     parameters:
