@@ -7,7 +7,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /api/noticia/{id}:
+ * /api/noticias/{id}:
  *   get:
  *     summary: Obtiene una noticia específica
  *     parameters:
@@ -25,7 +25,7 @@ router.get('/:id', getNoticia);
 
 /**
  * @swagger
- * /api/noticia/:
+ * /api/noticias/:
  *   get:
  *     summary: Obtiene todas las noticias
  *     responses:
@@ -36,7 +36,7 @@ router.get('/', getAllNoticias);
 
 /**
  * @swagger
- * /api/noticia/:
+ * /api/noticias/:
  *   post:
  *     summary: Crea una nueva noticia
  *     requestBody:
@@ -58,7 +58,7 @@ router.post('/', postNoticia);
 
 /**
  * @swagger
- * /api/noticia/{id}:
+ * /api/noticias/{id}:
  *   delete:
  *     summary: Elimina una noticia específica
  *     parameters:
